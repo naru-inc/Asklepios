@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
-import { DoctorComponent } from './doctor/doctor.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
-  children: [{
-    path: 'doctor-dashboard',
-    component : DoctorComponent,
-
-  }]
-  }];
+  },
+{
+  path: 'doctor',
+  loadChildren : './doctor/doctor.module#DoctorModule',
+}];
 
 
 @NgModule({
