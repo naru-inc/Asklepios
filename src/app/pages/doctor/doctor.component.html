@@ -1,14 +1,41 @@
-<div class="uk-container uk-container-large ">
-    <div class="uk-text-center" uk-grid>
-        <div class="uk-width-1-6@s uk-visible@s" >
-            <div class="uk-container uk-container-small " uk-sticky >
-                <app-sidebar></app-sidebar>
-            </div>
-        </div>
-        <div class="uk-width-expand@s">
-            <div class="uk-card uk-card-default uk-card-body" style="height:3000px">      <router-outlet></router-outlet> 
-            </div>
-        </div>
-    </div>
-</div>
 
+  <div  uk-grid>
+    <div class="col-2 ">
+      <div class="uk-container uk-container-small  uk-text-center" uk-sticky style="    min-width: 80px; background:white">
+        <app-sidebar></app-sidebar>
+      </div>
+    </div>
+    <div class="col-10">
+
+      <div class="uk-margin-medium-top uk-container uk-container-large " style="    min-width: 900px;">
+            <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+                    <div class="uk-navbar-left">
+                            <b style="color : rgb(0, 174, 239)">
+                                    Bonjour Dr. Hammadi.
+                                    <br>
+                                    Votre prochain rendez-vous est dans 3 minutes.
+                            </b>
+                            
+                    
+                </div>
+                <div class="uk-navbar-right">
+
+                        <div>
+                            <a class="uk-navbar-toggle" uk-search-icon href="#"></a>
+                            <div class="uk-drop" uk-drop="mode: click; pos: left-center; offset: 0">
+                                <form class="uk-search uk-search-navbar uk-width-1-1">
+                                    <input class="uk-search-input" type="search" placeholder="Search..." autofocus>
+                                </form>
+                            </div>
+                        </div>
+                
+                    </div>
+
+            </nav>
+         
+
+
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
