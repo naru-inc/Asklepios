@@ -27,6 +27,9 @@ $Asklepios-theme: mat-light-theme($Asklepios-primary, $Asklepios-accent, $Asklep
 @include angular-material-theme($Asklepios-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/uikit/src/scss/variables-theme.scss";
+@import "../node_modules/uikit/src/scss/mixins-theme.scss";
+@import "../node_modules/uikit/src/scss/uikit-theme.scss";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
