@@ -5,9 +5,11 @@ import { DoctorRoutingModule } from './doctor-routing.module';
 import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [DoctorComponent, DoctorDashboardComponent],
+  declarations: [DoctorComponent, DoctorDashboardComponent,
+    SidebarComponent],
   imports: [
     CommonModule,
     DoctorRoutingModule,

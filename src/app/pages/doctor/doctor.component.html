@@ -1,5 +1,14 @@
-<div class="uk-container-large">
-  
+<div class="uk-container uk-container-large ">
+    <div class="uk-text-center" uk-grid>
+        <div class="uk-width-1-6@s uk-visible@s" >
+            <div class="uk-container uk-container-small " uk-sticky >
+                <app-sidebar></app-sidebar>
+            </div>
+        </div>
+        <div class="uk-width-expand@s">
+            <div class="uk-card uk-card-default uk-card-body" style="height:3000px">      <router-outlet></router-outlet> 
+            </div>
+        </div>
+    </div>
 </div>
-      <router-outlet></router-outlet> 
 

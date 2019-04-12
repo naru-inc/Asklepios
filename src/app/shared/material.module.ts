@@ -29,6 +29,7 @@ import {
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTreeModule} from '@angular/material/tree';
 import {NgModule} from '@angular/core';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 
 @NgModule({
