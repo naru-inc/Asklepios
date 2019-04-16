@@ -6,10 +6,11 @@ import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.co
 import { SharedModule } from 'src/app/shared/shared.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
+import { SinglePatientComponent } from '../patients/single-patient/single-patient.component';
 
 @NgModule({
   declarations: [DoctorComponent, DoctorDashboardComponent,
-    SidebarComponent],
+    SidebarComponent, SinglePatientComponent],
   imports: [
     CommonModule,
     DoctorRoutingModule,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { DoctorComponent } from './doctor.component';
 import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
+import { SinglePatientComponent } from '../patients/single-patient/single-patient.component';
 
 const routes: Routes = [{
   path: '',
@@ -10,7 +11,13 @@ const routes: Routes = [{
   children: [{
     path : 'dashboard',
     component: DoctorDashboardComponent
-  }]
+  },
+{
+  path: 'patient/:id',
+  component: SinglePatientComponent
+},
+{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+]
 }];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
