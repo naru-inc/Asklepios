@@ -20,6 +20,7 @@ import {
     MatToolbarModule,
     MatSidenavModule,
     MatExpansionModule,
+    MatRippleModule,
     MatStepperModule,
     MatButtonToggleModule,
     MatRadioModule,
@@ -36,6 +37,7 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
     imports: [
       MatSelectModule,
       MatCheckboxModule,
+      MatRippleModule,
       MatBadgeModule,
       MatDialogModule,
       MatSlideToggleModule,
@@ -71,6 +73,7 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
       MatTreeModule,
       MatButtonModule,
       MatMenuModule,
+      MatRippleModule,
       MatIconModule,
       MatCardModule,
       MatSliderModule,
