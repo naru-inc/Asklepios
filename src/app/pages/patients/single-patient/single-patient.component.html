@@ -1,15 +1,25 @@
 <div uk-grid>
     <div class="col-5 col-xl-4">
       <div>
-        <div class="uk-card uk-card-small uk-card-hover  uk-card-body  uk-text-center" style="height:75px;  ">
-  
-       
-        </div>
+  <div class="uk-flex uk-flex-inline">
+    <img class="avatar-image" src="assets/images/per1.jpg" alt="per1">
+    <b style="padding: 20px" >
+      Patient Ben Patient.
+      <br>
+      84 ans.
+</b>
+
+  </div>
+
       </div>
     </div>
     <div class="col-4 col-xl-3">
       <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:75px">
-       
+        <div class="uk-flex uk-flex-inline">
+          <h3 style="color : rgb(0, 174, 239)">25 Avril 2019 </h3><img class="text-icon" src="assets/images/rdv.svg" uk-svg
+            width="30" height="30">
+
+        </div>
   
       </div>
   
@@ -23,3 +33,31 @@
   
   
   </div>
+  <div uk-grid>
+    <div class="col-11 col-xl-11">
+      <div>
+            <div style="display: block;">
+                <canvas baseChart width="400" height="200"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins">
+                </canvas>
+              </div>
+  
+       
+      </div>
+    </div>
+
+  
+  
+  
+  
+  </div>
+
+
+  
+  
