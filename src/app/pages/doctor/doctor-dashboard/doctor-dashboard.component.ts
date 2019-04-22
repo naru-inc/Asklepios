@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -7,16 +8,30 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./doctor-dashboard.component.scss']
 })
 export class DoctorDashboardComponent implements OnInit {
+  firestore: any;
+  patients: any = [];
 
-  constructor(private router: Router) { }
-
-  ngOnInit() {
+  constructor(private router: Router) {    this.firestore = firebase.firestore();
   }
 
-  navigateToPatient() {
+  ngOnInit() {
+    this.getPatients();
+  }
 
-    this.router.navigate(['doctor/patient/' + '3']);
 
+  navigateToPatient(id) {
+
+    this.router.navigate(['doctor/patient/' + id]);
+
+  }
+  async getPatients() {
+    const query = this.firestore.collection('Patient').orderBy('id').limit(10);
+    const snapshot = await query.get();
+    snapshot.forEach( doc => {
+      this.patients.unshift(doc.data());
+
+    });
   }
 
 }
+
