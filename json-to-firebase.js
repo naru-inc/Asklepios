@@ -36,12 +36,26 @@ var names=["Hang Lemoine",  
     var patient=[];
 for (var i = 0; i < names.length; i++) {
     patient[i]={
-        "id": i+1,
+        "id": (i+1).toString(),
         "name":names[i],
         "age": Math.floor(Math.random() * 45) + 55,
         "sex":sex[Math.floor(Math.random() * 2) + 0]
     }
   }
+
+  function random(){
+
+    var valeurs = [];
+
+    for (var i=0; i <=23; i++) {
+        var rand = Math.floor(Math.random() * 10) + 0;
+        valeurs[i]=rand;
+    }
+    return valeurs;
+
+  }
+
+
 
 
  patient.forEach(function(obj) {
@@ -51,7 +65,12 @@ for (var i = 0; i < names.length; i++) {
         age: obj.age,
         sex:obj.sex
     }).then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
+        db.collection('Patient').doc(docRef.id).collection('Symptom').add({
+            pain: random(),
+            fatigue: random(),
+            nausea: random(),
+            dizziness: random(),
+        });
     })
     .catch(function(error) {
         console.error("Error adding document: ", error);

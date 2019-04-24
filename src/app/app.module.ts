@@ -10,9 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DoctorHeaderComponent } from './components/doctor-header/doctor-header.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
-import { PatientsService } from './services/patients.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { PatientService } from './services/patient.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     BrowserAnimationsModule,
     NgbModule
   ],
-  providers: [AuthService, PatientsService, AuthGuardService],
+  providers: [AuthService, AuthGuardService, PatientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,9 +4,10 @@
   <div class="uk-flex uk-flex-inline">
     <img class="avatar-image" src="assets/images/per1.jpg" alt="per1">
     <b style="padding: 20px" >
-      Patient Ben Patient.
+      {{ patient.name }}
       <br>
-      84 ans.
+      {{ patient.age}}
+
 </b>
 
   </div>
@@ -35,18 +36,18 @@
   </div>
   <div uk-grid>
     <div class="col-11 col-xl-11">
-      <div>
+   <div >
             <div style="display: block;">
                 <canvas baseChart width="400" height="200"
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [colors]="barChartColors"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"
+                 >
                 </canvas>
-              </div>
+              </div>  
   
        
       </div>

@@ -13,7 +13,7 @@ const routes: Routes = [{
     component: DoctorDashboardComponent
   },
 {
-  path: 'patient/:id',
+  path: 'patient',
   component: SinglePatientComponent
 },
 { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

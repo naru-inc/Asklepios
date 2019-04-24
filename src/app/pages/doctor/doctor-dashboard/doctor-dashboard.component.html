@@ -72,7 +72,7 @@
             <div class="col-md-6 col-xl-6" style="height:550px;  overflow-y: auto">
 
       <mat-list>
-        <mat-list-item class="clikable" *ngFor="let patient of patients" matRipple (click)="navigateToPatient(patient.id)">
+        <mat-list-item class="clikable" *ngFor="let patient of patients" matRipple (click)="navigateToPatient(patient)">
           <img matListAvatar src="assets/images/per1.jpg" alt="per1">
           <h3 matLine> {{patient.name}} </h3>
           <p matLine>
@@ -83,6 +83,8 @@
         
         
       </mat-list>
+            </div>
+            <div class="col-md-6 col-xl-6">
             </div>
         </div>
 
