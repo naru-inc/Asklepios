@@ -72,6 +72,7 @@
             <div class="col-md-6 col-xl-6" style="height:550px;  overflow-y: auto">
 
       <mat-list>
+        <h3 mat-subheader>Aujourd'hui</h3>
         <mat-list-item class="clikable" *ngFor="let patient of patients" matRipple (click)="navigateToPatient(patient)">
           <img matListAvatar src="assets/images/per1.jpg" alt="per1">
           <h3 matLine> {{patient.name}} </h3>
