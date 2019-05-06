@@ -5,6 +5,8 @@ import { Router, NavigationStart, ActivatedRoute } from '@angular/router';
 import {PatientService } from '../../../services/patient.service';
 import * as firebase from 'firebase/app';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import * as moment from "moment";
+import {Moment} from "moment";
 
 @Component({
   selector: 'app-single-patient',
@@ -18,7 +20,9 @@ export class SinglePatientComponent implements OnInit {
   nausea: any;
   dizziness: any;
   firestore: any;
-
+  ispatient=true;
+  today=moment(new Date()).format("LL");
+ 
   public barChartOptions: ChartOptions = {
     responsive: true,
     scales: { xAxes: [{}], yAxes: [{}] },
@@ -55,9 +59,11 @@ export class SinglePatientComponent implements OnInit {
   ];
   constructor(public router: Router, private data: PatientService) {
     this.firestore = firebase.firestore();
+    moment.locale('fr');
    }
 
    ngOnInit() {
+    this.today=moment(new Date()).format("LL");
     this.data.currentPatient.subscribe(patient => this.patient = patient);
     this.getRTData(this.patient);
 
