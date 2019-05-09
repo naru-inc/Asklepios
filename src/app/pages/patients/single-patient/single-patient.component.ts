@@ -21,7 +21,8 @@ export class SinglePatientComponent implements OnInit {
   dizziness: any;
   firestore: any;
   ispatient=true;
-  today=moment(new Date()).format("LL");
+  panelOpenState = false;
+  today=moment(new Date()).format("LLLL");
  
   public barChartOptions: ChartOptions = {
     responsive: true,

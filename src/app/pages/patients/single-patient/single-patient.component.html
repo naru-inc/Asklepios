@@ -1,12 +1,10 @@
 <div uk-grid>
-    <div class="col-6 col-xl-6">
-      <div>
+    <div class="col-4 col-xl-4">
+      <div class="uk-card-blue uk-card-small uk-card-body uk-text-center" style="padding: 1px 1px;">
   <div class="uk-flex uk-flex-inline">
     <img class="avatar-image" src="assets/images/per1.jpg" alt="per1">
-    <b style="padding: 20px" >
+    <b style="padding: 11px" >
       {{ patient.name }}
-      <br>
-      {{ patient.age}} Ans
 
 </b>
 
@@ -14,11 +12,25 @@
 
       </div>
     </div>
-    <div class="col-2 col-xl-2"></div>
     <div class="col-4 col-xl-4">
-      <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" style="height:75px">
-        <div class="uk-flex uk-flex-inline">
-          <h3 style="color : rgb(0, 174, 239)">{{ today}} </h3><img class="text-icon" src="assets/images/rdv.svg" uk-svg
+      <div class="uk-card uk-card-small uk-card-body uk-text-center" style="padding: 1px 1px;">
+      <div class="uk-flex uk-flex-inline">
+        <b style="padding: 16px;color : rgb(0, 174, 239)" >
+          Age : {{ patient.age }} | Sex : {{patient.sex}}
+    
+    </b>
+    
+      </div>
+    </div>
+  </div>
+    <div class="col-4 col-xl-4">
+      <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" style="height:60px">
+        <div class="uk-flex uk-flex-inline" uk-countdown="date: 2019-05-16T01:07:34+00:00">
+                  <h3 style="padding: 16px;color : rgb(0, 174, 239)"><b class="uk-countdown-number uk-countdown-days"></b> J -
+                  <b class="uk-countdown-number uk-countdown-hours"></b>
+                  :<b class="uk-countdown-number uk-countdown-minutes"></b>
+                  :<b class="uk-countdown-number uk-countdown-seconds"></b></h3>
+              <img class="text-icon" src="assets/images/rdv.svg" uk-svg
             width="30" height="30">
 
         </div>
@@ -33,21 +45,21 @@
   
   </div>
   <div uk-grid>
-    <div class="col-6 col-xl-6">
-      <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:75px">
+    <div class="col-4 col-xl-4">
+      <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
         <div class="uk-flex uk-flex-inline">
-          <h3 style="color : rgb(0, 174, 239)">Cancer de poumon | Stade IVa </h3><img class="text-icon" src="assets/images/rdv.svg" uk-svg
+          <h3 style="color : rgb(0, 174, 239)">Cancer de poumon <small>| Stade IVa</small> </h3><img class="text-icon" src="assets/images/down.svg" uk-svg
           width="30" height="30">
         </div>
   
       </div>
   
     </div>
-    <div class="col-6 col-xl-6">
-      <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:75px">
+    <div class="col-8 col-xl-8">
+      <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
         <div class="uk-flex uk-flex-inline">
-          
-
+          <h3 style="color : rgb(0, 174, 239)">chimiothérapie de première ligne en Gemcitabine - Cisplatine</h3><img class="text-icon" src="assets/images/next.svg" uk-svg
+          width="30" height="30">
         </div>
   
       </div>
@@ -55,28 +67,81 @@
     </div>
   </div>
   <div uk-grid>
-    <div class="col-11 col-xl-11">
-   <div >
-            <div style="display: block;">
-                <canvas baseChart width="400" height="200"
-                  [datasets]="barChartData"
-                  [labels]="barChartLabels"
-                  [options]="barChartOptions"
-                  [colors]="barChartColors"
-                  [legend]="barChartLegend"
-                  [chartType]="barChartType"
-                 >
-                </canvas>
-              </div>  
+    <div class="col-md-12 col-xl-12">
+      <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" >
   
-       
+          <div uk-grid>
+              <div class="col-md-12 col-xl-12" style="height:550px;  overflow-y: auto">
+                <h3 style="text-align:left;color : rgb(0, 174, 239)">Signes Cliniques <img class="text-icon" src="assets/images/hospital.svg" uk-svg
+                  width="30" height="30"></h3>
+                <div style="display: block;">
+                  <canvas baseChart width="400" height="200"
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [colors]="barChartColors"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType"
+                   >
+                  </canvas>
+                </div> 
+              </div>
+          </div>
+  
       </div>
+  
     </div>
-
+  </div>
+  <div uk-grid>
+    <div class="col-md-12 col-xl-12">
+      <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" >
   
+          <div uk-grid>
+              <div class="col-md-12 col-xl-12" style="height:550px;  overflow-y: auto">
+                <h3 style="text-align:left;color : rgb(0, 174, 239)">Alertes<img class="text-icon" src="assets/images/danger.svg" uk-svg
+                  width="30" height="30"></h3>
+                  <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header  class="alert alert-danger" role="alert">
+                        <mat-panel-title>
+                         <b>Céphalées Matinales et vomissements</b>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                         il y a 2 Heures
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                  
+                      <mat-form-field>
+                        <input matInput placeholder="First name">
+                      </mat-form-field>
+                  
+                      <mat-form-field>
+                        <input matInput placeholder="Age">
+                      </mat-form-field>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>I'm visible because I am open</p>
+                    </mat-expansion-panel>
+                  </mat-accordion> 
+              </div>
+          </div>
   
+      </div>
   
-  
+    </div>
+  </div>
+  <div uk-grid>
+    <div class="col-11 col-xl-11">
+    </div>
   </div>
 
 
