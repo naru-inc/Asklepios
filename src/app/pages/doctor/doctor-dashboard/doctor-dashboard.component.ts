@@ -11,7 +11,7 @@ export class DoctorDashboardComponent implements OnInit {
   firestore: any;
   patients: any = [];
   patient: any;
-  ispatient=false;
+  
 
   constructor(private router: Router, private data: PatientService ) {    this.firestore = firebase.firestore();
   }

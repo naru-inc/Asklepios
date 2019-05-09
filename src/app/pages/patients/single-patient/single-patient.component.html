@@ -26,11 +26,11 @@
     <div class="col-4 col-xl-4">
       <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" style="height:60px">
         <div class="uk-flex uk-flex-inline" uk-countdown="date: 2019-05-16T01:07:34+00:00">
-                  <h3 style="padding: 16px;color : rgb(0, 174, 239)"><b class="uk-countdown-number uk-countdown-days"></b> J -
+                  <h3 style="margin-top: -20px;color : rgb(0, 174, 239)"><b class="uk-countdown-number uk-countdown-days"></b> J -
                   <b class="uk-countdown-number uk-countdown-hours"></b>
                   :<b class="uk-countdown-number uk-countdown-minutes"></b>
                   :<b class="uk-countdown-number uk-countdown-seconds"></b></h3>
-              <img class="text-icon" src="assets/images/rdv.svg" uk-svg
+              <img class="text-icon" style="margin-top: -24px;" src="assets/images/rdv.svg" uk-svg
             width="30" height="30">
 
         </div>
@@ -60,6 +60,7 @@
         <div class="uk-flex uk-flex-inline">
           <h3 style="color : rgb(0, 174, 239)">chimiothérapie de première ligne en Gemcitabine - Cisplatine</h3><img class="text-icon" src="assets/images/next.svg" uk-svg
           width="30" height="30">
+          
         </div>
   
       </div>
@@ -72,8 +73,16 @@
   
           <div uk-grid>
               <div class="col-md-12 col-xl-12" style="height:550px;  overflow-y: auto">
-                <h3 style="text-align:left;color : rgb(0, 174, 239)">Signes Cliniques <img class="text-icon" src="assets/images/hospital.svg" uk-svg
+                <div class="uk-padding"></div>
+               
+                <h3 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Signes Cliniques <img class="text-icon" src="assets/images/hospital.svg" uk-svg
                   width="30" height="30"></h3>
+                  <ul class="uk-iconnav" style="float: right;">
+                    <li><a href="#" uk-icon="icon: plus"></a></li>
+                    <li><a href="#" uk-icon="icon: file-edit"></a></li>
+                    <li><a href="#" uk-icon="icon: copy"></a></li>
+                    <li><a href="#" uk-icon="icon: trash"></a></li>
+                </ul>
                 <div style="display: block;">
                   <canvas baseChart width="400" height="200"
                     [datasets]="barChartData"
@@ -98,8 +107,17 @@
   
           <div uk-grid>
               <div class="col-md-12 col-xl-12" style="height:550px;  overflow-y: auto">
-                <h3 style="text-align:left;color : rgb(0, 174, 239)">Alertes<img class="text-icon" src="assets/images/danger.svg" uk-svg
+                <div class="uk-padding"></div>
+                <h3 style="float:left;display:inline;color : rgb(0, 174, 239)">Alertes<img class="text-icon" src="assets/images/danger.svg" uk-svg
                   width="30" height="30"></h3>
+                  <ul class="uk-iconnav" style="float: right;">
+                    <li><a href="#" uk-icon="icon: plus"></a></li>
+                    <li><a href="#" uk-icon="icon: file-edit"></a></li>
+                    <li><a href="#" uk-icon="icon: copy"></a></li>
+                    <li><a href="#" uk-icon="icon: trash"></a></li>
+                </ul>
+                <br/>
+                <br/>
                   <mat-accordion>
                     <mat-expansion-panel>
                       <mat-expansion-panel-header  class="alert alert-danger" role="alert">

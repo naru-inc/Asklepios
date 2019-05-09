@@ -146,3 +146,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     overflow: hidden;
     transition: 225ms cubic-bezier(.4,0,.2,1),box-shadow 280ms cubic-bezier(.4,0,.2,1) !important;
 }
+@media (min-width: 960px){
+.uk-countdown-number {
+    font-size: 20px;
+}
+}
+
+@media (min-width: 640px){
+.uk-countdown-number {
+    font-size: 16px;
+}
+}
+.uk-countdown-number {
+    font-size: 20px;
+}
+@media (min-width: 1200px){
+.uk-padding {
+    padding: 10px;
+}
+}
+
+.uk-padding {
+    padding: 10px;
+}
