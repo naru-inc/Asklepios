@@ -5,8 +5,8 @@ import { Router, NavigationStart, ActivatedRoute } from '@angular/router';
 import {PatientService } from '../../../services/patient.service';
 import * as firebase from 'firebase/app';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import * as moment from "moment";
-import {Moment} from "moment";
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 @Component({
   selector: 'app-single-patient',
@@ -20,10 +20,10 @@ export class SinglePatientComponent implements OnInit {
   nausea: any;
   dizziness: any;
   firestore: any;
-  ispatient=true;
+  ispatient = true;
   panelOpenState = false;
-  today=moment(new Date()).format("LLLL");
- 
+  today = moment(new Date()).format('LLLL');
+
   public barChartOptions: ChartOptions = {
     responsive: true,
     scales: { xAxes: [{}], yAxes: [{}] },
@@ -64,9 +64,32 @@ export class SinglePatientComponent implements OnInit {
    }
 
    ngOnInit() {
-    this.today=moment(new Date()).format("LL");
+    this.today = moment(new Date()).format('LL');
     this.data.currentPatient.subscribe(patient => this.patient = patient);
-    this.getRTData(this.patient);
+    this.assignData();
+
+  }
+  public assignData() {
+    this.pain = this.random();
+    this.fatigue = this.random();
+    this.dizziness = this.random();
+    this.nausea = this.random();
+    this.barChartData = [    { data: this.pain, label: 'Douleur' },
+    { data: this.fatigue, label: 'Fatigue' },
+    { data: this.nausea, label: 'Nausée' }];
+    console.log(this.barChartData);
+
+  }
+
+  public random() {
+
+    const valeurs = [];
+
+    for (let i = 0; i <= 23; i++) {
+        const rand = Math.floor(Math.random() * 10) + 0;
+        valeurs[i] = rand;
+    }
+    return valeurs;
 
   }
 
@@ -81,11 +104,6 @@ export class SinglePatientComponent implements OnInit {
     { data: this.fatigue, label: 'Fatigue' },
     { data: this.nausea, label: 'Nausée' }];
     console.log(this.barChartData);
-
-  /*   snapshot.forEach( doc => {
-      const currentData = doc.data();
-
-    }); */
   }
 
 
