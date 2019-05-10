@@ -56,6 +56,30 @@ for (var i = 0; i < names.length; i++) {
   }
 
 
+  function SingleRandomDate() {
+    end =new Date();
+    start = end.setDate(end.getDate() - 1);
+
+    startHour=0;
+    endHour=23;
+  var date = new Date(+start + Math.random() * (end - start));
+  var hour = startHour + Math.random() * (endHour - startHour) | 0;
+  date.setHours(hour);
+  console.log(date);
+  return date;
+}
+
+function generateDates(){
+var valeurs = [];
+
+for (var i=0; i <=23; i++) {
+    valeurs[i]=SingleRandomDate();
+}
+return valeurs;
+}
+
+
+
 
 
  patient.forEach(function(obj) {
@@ -67,9 +91,13 @@ for (var i = 0; i < names.length; i++) {
     }).then(function(docRef) {
         db.collection('Patient').doc(docRef.id).collection('Symptom').add({
             pain: random(),
+            painTime:generateDates(),
             fatigue: random(),
+            fatigueTime:generateDates(),
             nausea: random(),
+            nauseaTime:generateDates(),
             dizziness: random(),
+            dizzinessTime:generateDates(),
         });
     })
     .catch(function(error) {
