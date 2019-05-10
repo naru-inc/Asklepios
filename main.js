@@ -1,20 +1,20 @@
-const {app, BrowserWindow} = require('electron')
+const electron = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
-
 let win
-
-function createWindow () {
-  win = new BrowserWindow({  
-      backgroundColor: '#ffffff',
-      fullscreen:true,
-      minimizable:false,
-  icon: (url.format({
-    pathname: path.join(__dirname, 'dist/assets/images/logo.png'),
-    protocol: 'file:',
-    slashes: true
-  }))
-})
+function createWindow() {
+  var screenElectron = electron.screen;
+  var mainScreen = screenElectron.getPrimaryDisplay();
+  var dimensions = mainScreen.size;
+  win = new BrowserWindow({
+    width: dimensions.width,
+    height: dimensions.height,
+    minHeight:dimensions.height,
+   minWidth:dimensions.width,
+    backgroundColor: '#ffffff',
+    icon: __dirname + 'assets/images/logo.png',
+  })
 
   // load the dist folder from Angular
   win.loadURL(url.format({
