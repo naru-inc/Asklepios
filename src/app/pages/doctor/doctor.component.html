@@ -1,19 +1,46 @@
 
   <div  uk-grid>
-    <div class="col-2 ">
-      <div class="uk-container uk-container-small  uk-text-center" uk-sticky style="    min-width: 80px; background:white">
+    <div class="col-1 rounded">
+      <div class="uk-text-center" uk-sticky style="min-width: 40px;float:right">
         <app-sidebar></app-sidebar>
       </div>
     </div>
-    <div class="col-10">
+    <div class="col-3 second-list">
+      <div class="list-menu uk-card uk-padding-remove uk-card-body uk-text-large uk-text-center" uk-sticky>
+        <mat-list>
+          <h3 mat-subheader style="font-size:20px">Patients 
+              <ul class="uk-iconnav" style="position: absolute;right: 8px;">
+                  <li><a href="#" uk-icon="icon: close"></a></li>
+              </ul>
+          </h3>
+          <mat-list-item class="add clikable"  matRipple >
+            <img matListAvatar src="assets/images/add-user.png" alt="per1">
+            <h3 matLine style="font-size: 13px;text-align: left;color: #00AEEF;"> Ajouter Un Patient</h3>
+          </mat-list-item>
+          <mat-list-item class="listing clikable" *ngFor="let patient of patients" matRipple (click)="navigateToPatient(patient)">
+              <img matListAvatar src="assets/images/per1.jpg" alt="per1">
+              <h3 matLine> {{patient.name}} </h3>
+              <p matLine>
+                  <span class="demo-2"> <img *ngIf="patient.sex=='M'" src="assets/images/male-light.svg" width="15" height="15" ><img *ngIf="patient.sex=='F'" src="assets/images/female-light.svg"  width="15" height="15" > </span>
+                <span> <strong style="margin-left: 10px;margin-right: 10px;">|</strong>{{patient.age}} Ans </span>
+               
+              </p>
+            </mat-list-item>
+          
+          <div class="uk-padding"></div>
+        </mat-list>
+        
+      </div>
+    </div>
+    <div class="col-8">
 
-      <div  class="uk-margin-medium-top uk-container uk-container-large " style="    min-width: 900px;">
-            <nav *ngIf="ispatient" class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-                    <div class="uk-navbar-left">
+      <div  class="uk-margin-medium-top uk-container uk-container-large " style="    min-width: 850px;">
+         <!--   <nav  class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+                    <div *ngIf="ispatient" class="uk-navbar-left">
                             <b style="color : rgb(0, 174, 239)">
                                     Bonjour Dr. Hammadi.
                                     <br>
-                                    Votre prochain rendez-vous est dans 3 minutes.
+                                    Votre prochain rendez-vous est dans 3 minutes. 
                             </b>
                             
                     
@@ -31,11 +58,12 @@
                 
                     </div>
 
-            </nav>
+            </nav>-->
          
 
 
         <router-outlet></router-outlet>
+        <div class="uk-padding"></div>
       </div>
     </div>
   </div>

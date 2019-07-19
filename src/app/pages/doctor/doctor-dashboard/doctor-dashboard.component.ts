@@ -11,6 +11,7 @@ export class DoctorDashboardComponent implements OnInit {
   firestore: any;
   patients: any = [];
   patient: any;
+  ispatient:boolean=false;
   
 
   constructor(private router: Router, private data: PatientService ) {    this.firestore = firebase.firestore();
@@ -18,6 +19,8 @@ export class DoctorDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getPatients();
+    this.patient=false;
+    console.log(this.patient)
   }
 
 

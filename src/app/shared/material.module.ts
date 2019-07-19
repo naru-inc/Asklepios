@@ -6,6 +6,7 @@ import {
     MatBadgeModule,
     MatCardModule,
     MatDialogModule,
+    MatNativeDateModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
@@ -24,7 +25,9 @@ import {
     MatStepperModule,
     MatButtonToggleModule,
     MatRadioModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatDatepickerModule
   } from '@angular/material';
 
 import {MatChipsModule} from '@angular/material/chips';
@@ -62,7 +65,10 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
       MatStepperModule,
       MatButtonToggleModule,
       MatRadioModule,
-      MatTabsModule
+      MatTabsModule,
+      MatTableModule,
+      MatNativeDateModule,
+      MatDatepickerModule
     ],
     exports: [
       MatSelectModule,
@@ -92,7 +98,9 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
       MatStepperModule,
       MatButtonToggleModule,
       MatRadioModule,
-      MatTabsModule
+      MatTabsModule,
+      MatTableModule,
+      MatDatepickerModule
     ],
   })
 

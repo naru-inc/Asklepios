@@ -1,0 +1,73 @@
+
+.mat-tab-group{
+    margin-top: 9px;
+    margin-left: -4px;
+}
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar{
+    display:none
+}
+::ng-deep .mat-tab-header-pagination {
+    display: none !important;
+    touch-action: none;
+}
+::ng-deep mat-tab-header.mat-tab-header{
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border-bottom: none;
+    display:inline
+}
+::ng-deep mat-tab-header.mat-tab-header .mat-tab-label {
+    height: 48px;
+    padding: 0px 60px;
+    border-radius: 33px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin-left: 15px;
+    opacity: 0.9;
+    /* min-width: 130px; */
+    border: 2px #f44336 solid;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+   
+}
+::ng-deep  .mat-tab-label-active{
+    background: #f44336;
+    color:white
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.4em 0;
+}
+.uk-offcanvas-bar {
+    left: -350px;
+    width: 420px;
+    padding: 40px 40px;
+}
+.uk-offcanvas-bar .uk-subnav-pill > * > :first-child {
+    background-color: white;
+    color: #00AEEF;
+    border: 1px solid #00AEEF;
+    font-size: 12px;
+    border-radius: 30px;
+}
+.uk-offcanvas-bar .uk-subnav-pill > .uk-active > a {
+    background-color: #00AEEF;
+    color: white;
+    border-radius: 10px;
+}
+.uk-offcanvas-bar .uk-subnav {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0px !important;
+    padding: 0;
+    list-style: none;
+}
+.uk-offcanvas-bar .uk-button-primary {
+    background-color: #fff;
+    color: #00AEEF;
+    border: 1px solid #00AEEF;
+    border-radius: 30px;
+}

@@ -1,167 +1,344 @@
 <div uk-grid>
-    <div class="col-4 col-xl-4">
-      <div class="uk-card-blue uk-card-small uk-card-body uk-text-center" style="padding: 1px 1px;">
-  <div class="uk-flex uk-flex-inline">
-    <img class="avatar-image" src="assets/images/per1.jpg" alt="per1">
-    <b style="padding: 11px" >
-      {{ patient.name }}
-
-</b>
-
-  </div>
-
-      </div>
-    </div>
-    <div class="col-4 col-xl-4">
-      <div class="uk-card uk-card-small uk-card-body uk-text-center" style="padding: 1px 1px;">
+  <div class="col-4 col-xl-4">
+    <div class="uk-card-blue uk-card-small uk-card-body uk-text-center" style="padding: 1px 1px;">
       <div class="uk-flex uk-flex-inline">
-        <b style="padding: 16px;color : rgb(0, 174, 239)" >
+        <img class="avatar-image" src="assets/images/per1.jpg" alt="per1">
+        <b style="padding: 11px">
+          {{ patient.name }}
+
+        </b>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="col-4 col-xl-4">
+    <div class="uk-card uk-card-small uk-card-body uk-text-center" style="padding: 1px 1px;">
+      <div class="uk-flex uk-flex-inline">
+        <b style="padding: 16px;color : rgb(0, 174, 239)">
           Age : {{ patient.age }} | Sex : {{patient.sex}}
-    
-    </b>
-    
-      </div>
-    </div>
-  </div>
-    <div class="col-4 col-xl-4">
-      <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" style="height:60px">
-        <div class="uk-flex uk-flex-inline" uk-countdown="date: 2019-05-16T01:07:34+00:00">
-                  <h3 style="margin-top: -20px;color : rgb(0, 174, 239)"><b class="uk-countdown-number uk-countdown-days"></b> J -
-                  <b class="uk-countdown-number uk-countdown-hours"></b>
-                  :<b class="uk-countdown-number uk-countdown-minutes"></b>
-                  :<b class="uk-countdown-number uk-countdown-seconds"></b></h3>
-              <img class="text-icon" style="margin-top: -24px;" src="assets/images/rdv.svg" uk-svg
-            width="30" height="30">
 
-        </div>
-  
+        </b>
+
       </div>
-  
-    </div>
-    
-  
-  
-  
-  
-  </div>
-  <div uk-grid>
-    <div class="col-4 col-xl-4">
-      <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
-        <div class="uk-flex uk-flex-inline">
-          <h3 style="color : rgb(0, 174, 239)">Cancer de poumon <small>| Stade IVa</small> </h3><img class="text-icon" src="assets/images/down.svg" uk-svg
-          width="30" height="30">
-        </div>
-  
-      </div>
-  
-    </div>
-    <div class="col-8 col-xl-8">
-      <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
-        <div class="uk-flex uk-flex-inline">
-          <h3 style="color : rgb(0, 174, 239)">chimiothérapie de première ligne en Gemcitabine - Cisplatine</h3><img class="text-icon" src="assets/images/next.svg" uk-svg
-          width="30" height="30">
-          
-        </div>
-  
-      </div>
-  
     </div>
   </div>
-  <div uk-grid>
-    <div class="col-md-12 col-xl-12">
-      <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" >
-  
-          <div uk-grid>
-              <div class="col-md-12 col-xl-12" style="height:550px;  overflow-y: auto">
-                <div class="uk-padding"></div>
-               
-                <h3 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Signes Cliniques <img class="text-icon" src="assets/images/hospital.svg" uk-svg
-                  width="30" height="30"></h3>
-                  <ul class="uk-iconnav" style="float: right;">
-                    <li><a href="#" uk-icon="icon: plus"></a></li>
-                    <li><a href="#" uk-icon="icon: file-edit"></a></li>
-                    <li><a href="#" uk-icon="icon: copy"></a></li>
-                    <li><a href="#" uk-icon="icon: trash"></a></li>
-                </ul>
-                <div style="display: block;">
-                  <canvas baseChart width="400" height="200"
-                    [datasets]="barChartData"
-                    [labels]="barChartLabels"
-                    [options]="barChartOptions"
-                    [colors]="barChartColors"
-                    [legend]="barChartLegend"
-                    [chartType]="barChartType"
-                   >
-                  </canvas>
-                </div> 
-              </div>
+  <div class="col-4 col-xl-4">
+    <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" style="height:60px">
+      <div class="uk-flex uk-flex-inline" uk-countdown="date: 2019-05-16T01:07:34+00:00">
+        <h3 style="margin-top: -20px;color : rgb(0, 174, 239)"><b class="uk-countdown-number uk-countdown-days"></b> J -
+          <b class="uk-countdown-number uk-countdown-hours"></b>
+          :<b class="uk-countdown-number uk-countdown-minutes"></b>
+          :<b class="uk-countdown-number uk-countdown-seconds"></b></h3>
+        <img class="text-icon" style="margin-top: -24px;" src="assets/images/rdv.svg" uk-svg width="30" height="30">
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+</div>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">insert_chart</mat-icon>
+      Suivi Médical
+    </ng-template>
+    <div uk-grid>
+      <div class="col-4 col-xl-4">
+        <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
+          <div class="uk-flex uk-flex-inline">
+            <h3 style="color : rgb(0, 174, 239)">Cancer de poumon <small>| Stade IVa</small> </h3><img class="text-icon"
+              src="assets/images/down.svg" uk-svg width="30" height="30">
           </div>
-  
+
+        </div>
+
       </div>
-  
-    </div>
-  </div>
-  <div uk-grid>
-    <div class="col-md-12 col-xl-12">
-      <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" >
-  
-          <div uk-grid>
-              <div class="col-md-12 col-xl-12" style="height:550px;  overflow-y: auto">
-                <div class="uk-padding"></div>
-                <h3 style="float:left;display:inline;color : rgb(0, 174, 239)">Alertes<img class="text-icon" src="assets/images/danger.svg" uk-svg
-                  width="30" height="30"></h3>
-                  <ul class="uk-iconnav" style="float: right;">
-                    <li><a href="#" uk-icon="icon: plus"></a></li>
-                    <li><a href="#" uk-icon="icon: file-edit"></a></li>
-                    <li><a href="#" uk-icon="icon: copy"></a></li>
-                    <li><a href="#" uk-icon="icon: trash"></a></li>
-                </ul>
-                <br/>
-                <br/>
-                  <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header  class="alert alert-danger" role="alert">
-                        <mat-panel-title>
-                         <b>Céphalées Matinales et vomissements</b>
-                        </mat-panel-title>
-                        <mat-panel-description>
-                         il y a 2 Heures
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>
-                  
-                      <mat-form-field>
-                        <input matInput placeholder="First name">
-                      </mat-form-field>
-                  
-                      <mat-form-field>
-                        <input matInput placeholder="Age">
-                      </mat-form-field>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel (opened)="panelOpenState = true"
-                                         (closed)="panelOpenState = false">
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Self aware panel
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          Currently I am {{panelOpenState ? 'open' : 'closed'}}
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>
-                      <p>I'm visible because I am open</p>
-                    </mat-expansion-panel>
-                  </mat-accordion> 
-              </div>
+      <div class="col-8 col-xl-8">
+        <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
+          <div class="uk-flex uk-flex-inline">
+            <h3 style="color : rgb(0, 174, 239)">chimiothérapie de première ligne en Gemcitabine - Cisplatine</h3><img
+              class="text-icon" src="assets/images/next.svg" uk-svg width="30" height="30">
+
           </div>
-  
+
+        </div>
+
       </div>
-  
     </div>
-  </div>
-  <div uk-grid>
-    <div class="col-11 col-xl-11">
+    <div uk-grid>
+      <div class="col-md-12 col-xl-12">
+        <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center">
+
+          <div uk-grid>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
+
+              <h3 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Signes Cliniques <img
+                  class="text-icon" src="assets/images/hospital.svg" uk-svg width="30" height="30"></h3>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a uk-tooltip="Convertir sous forme d'un tableau" href="#" uk-icon="icon: table"></a></li>
+                <li><a uk-tooltip="Filter L'affichage" uk-toggle="target: #offcanvas-nav-primary"
+                    uk-icon="icon: settings"></a></li>
+                <li><a uk-tooltip="Télécharger les données" href="#" uk-icon="icon: download"></a>
+                  <div uk-dropdown="animation: uk-animation-slide-right-small; duration: 1000">
+                    <ul class="uk-nav uk-dropdown-nav">
+                      <li><a style="text-align: left" href="#" uk-icon="icon: file-pdf">Téléchager un PDF</a></li>
+                      <li><a style="text-align: left" href="#" uk-icon="icon: file-text">Télécharger un Fichier
+                          Excel</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a href="#" uk-icon="icon: refresh"></a></li>
+              </ul>
+              <!-- - -->
+              <div style="display: block;">
+                <canvas baseChart width="400" height="200" [datasets]="barChartData" [labels]="barChartLabels"
+                  [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend"
+                  [chartType]="barChartType">
+                </canvas>
+
+              </div>
+              <div>
+                <!-- <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer les Symptômes">
+                      </mat-form-field>-->
+                <table mat-table [dataSource]="clinicalSigns">
+                  <ng-container matColumnDef="symptom">
+                    <th mat-header-cell *matHeaderCellDef> Symptômes </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.symptom}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="level">
+                    <th mat-header-cell *matHeaderCellDef> Niveau </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.level}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Temps </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.date | date:'fullDate'}} </td>
+                  </ng-container>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsSv;"></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
+    <div uk-grid>
+      <div class="col-md-12 col-xl-12">
+        <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center">
+
+          <div uk-grid>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
+              <h3 style="float:left;display:inline;color : rgb(0, 174, 239)">Alertes<img class="text-icon"
+                  src="assets/images/danger.svg" uk-svg width="30" height="30"></h3>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a href="#" uk-icon="icon: plus"></a></li>
+                <li><a href="#" uk-icon="icon: file-edit"></a></li>
+                <li><a href="#" uk-icon="icon: copy"></a></li>
+                <li><a href="#" uk-icon="icon: trash"></a></li>
+              </ul>
+              <br />
+              <br />
+              <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header class="alert alert-danger" role="alert">
+                    <mat-panel-title>
+                      <b>Céphalées Matinales et vomissements</b>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      il y a 2 Heures
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <mat-form-field>
+                    <input matInput placeholder="First name">
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <input matInput placeholder="Age">
+                  </mat-form-field>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Self aware panel
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <div uk-grid>
+      <div class="col-11 col-xl-11">
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">notes</mat-icon>
+      Rendez-Vous et Observations
+    </ng-template>
+    <div uk-grid>
+      <div class="col-md-12 col-xl-12">
+        <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center">
+
+          <div uk-grid>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
+              <h3 style="float:left;display:inline;color : rgb(0, 174, 239)">Rendez-Vous du Patient<img
+                  class="text-icon" src="assets/images/danger.svg" uk-svg width="30" height="30"></h3>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a href="#" uk-icon="icon: plus"></a></li>
+                <li><a href="#" uk-icon="icon: file-edit"></a></li>
+                <li><a href="#" uk-icon="icon: copy"></a></li>
+                <li><a href="#" uk-icon="icon: trash"></a></li>
+              </ul>
+              <br />
+              <br />
+              <mat-table [dataSource]="dataSource">
+                <!-- Position Column -->
+                <ng-container matColumnDef="rendezvous">
+                  <mat-header-cell *matHeaderCellDef> Rendez Vous </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.date | date:'fullDate'}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="type">
+                  <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="observations">
+                  <mat-header-cell *matHeaderCellDef> Observations </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.observations}} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">contacts</mat-icon>
+      Fiche Client
+    </ng-template>
+
+    <div uk-grid>
+      <div class="col-md-12 col-xl-12">
+        <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center">
+
+          <div uk-grid>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
+              <h3 style="float:left;display:inline;color : rgb(0, 174, 239)">Alertes<img class="text-icon"
+                  src="assets/images/danger.svg" uk-svg width="30" height="30"></h3>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a href="#" uk-icon="icon: plus"></a></li>
+                <li><a href="#" uk-icon="icon: file-edit"></a></li>
+                <li><a href="#" uk-icon="icon: copy"></a></li>
+                <li><a href="#" uk-icon="icon: trash"></a></li>
+              </ul>
+              <br />
+              <br />
+              <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header class="alert alert-danger" role="alert">
+                    <mat-panel-title>
+                      <b>Céphalées Matinales et vomissements</b>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      il y a 2 Heures
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <mat-form-field>
+                    <input matInput placeholder="First name">
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <input matInput placeholder="Age">
+                  </mat-form-field>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Self aware panel
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>
+<div id="offcanvas-nav-primary" uk-offcanvas="overlay: true;flip: true;">
+  <div class="uk-offcanvas-bar uk-flex uk-flex-column"
+    style="    background: white;border: 2px solid #00AEEF; border-radius: 8px;">
+
+    <h3 style="color:#00AEEF;text-align: center">Filtrer l'affichage des données</h3>
+    <div class="uk-padding"></div>
+    <div class="uk-padding"></div>
+    <ul class="uk-subnav uk-subnav-pill" uk-switcher="connect: .switcher-container">
+      <li><a href="javascript:void(0);" (click)='filterForToday()'>Aujourd'hui</a></li>
+      <li><a href="javascript:void(0);" (click)='filterPerWeek()'>Cette Semaine</a></li>
+      <li><a href="javascript:void(0);" (click)='filterPerMonth()'>Ce Mois</a></li>
+    </ul>
+    <div class="uk-padding"></div>
+    <div class="uk-padding"></div>
+    <div class="uk-padding"></div>
+    <h6 style="color:#00AEEF;text-align: center">Filtrer Par Date</h6>
+    <form #customDateForm="ngForm" (ngSubmit)="DoCustom(customDateForm)">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <input style="color:#00AEEF;"   name="start" id="custom-start" ngModel required matInput [matDatepicker]="start" placeholder="Début" disabled>
+      <mat-datepicker #start disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <button  class="uk-button uk-button-primary" style="margin-left: 25px;margin-top: -13px;"   (click)="start.open()"><span uk-icon="icon:  history"></span>    </button>
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <input style="color:#00AEEF"  name="end" id="custom-end"   ngModel required matInput  matInput [matDatepicker]="end" placeholder="Fin" disabled>
+      <mat-datepicker #end disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <button  class="uk-button uk-button-primary" style="margin-left: 25px;margin-top: -13px;"   (click)="end.open()"><span uk-icon="icon: future"></span></button>
+    <div class="uk-padding"></div>
+    <button class="uk-button uk-button-primary" type="submit">Filtrer </button>
+  </form>
   </div>
-
-
-  
-  
+</div>

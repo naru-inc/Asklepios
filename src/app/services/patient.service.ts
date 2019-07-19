@@ -13,5 +13,12 @@ export class PatientService {
   changePatient(patient: object) {
     this.patientData.next(patient);
   }
+  StorePatientData(ID : string,data : object){
+    localStorage.setItem(ID, JSON.stringify(data));
+  }
+  GetStoredPatient(ID: string){
+    let data = JSON.parse(localStorage.getItem(ID));
+    return data
+  }
 
 }
