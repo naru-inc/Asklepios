@@ -25,11 +25,10 @@
   </div>
   <div class="col-4 col-xl-4">
     <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center" style="height:60px">
-      <div class="uk-flex uk-flex-inline" uk-countdown="date: 2019-05-16T01:07:34+00:00">
+      <div class="uk-flex uk-flex-inline" uk-countdown="date: 2019-07-25T01:07:34+00:00">
         <h3 style="margin-top: -20px;color : rgb(0, 174, 239)"><b class="uk-countdown-number uk-countdown-days"></b> J -
           <b class="uk-countdown-number uk-countdown-hours"></b>
           :<b class="uk-countdown-number uk-countdown-minutes"></b>
-          :<b class="uk-countdown-number uk-countdown-seconds"></b></h3>
         <img class="text-icon" style="margin-top: -24px;" src="assets/images/rdv.svg" uk-svg width="30" height="30">
 
       </div>
@@ -53,7 +52,7 @@
       <div class="col-4 col-xl-4">
         <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
           <div class="uk-flex uk-flex-inline">
-            <h3 style="color : rgb(0, 174, 239)">Cancer de poumon <small>| Stade IVa</small> </h3><img class="text-icon"
+            <h6 style="color : rgb(0, 174, 239)">Cancer de poumon <small>| Stade IVa</small> </h6><img class="text-icon"
               src="assets/images/down.svg" uk-svg width="30" height="30">
           </div>
 
@@ -63,7 +62,7 @@
       <div class="col-8 col-xl-8">
         <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
           <div class="uk-flex uk-flex-inline">
-            <h3 style="color : rgb(0, 174, 239)">chimiothérapie de première ligne en Gemcitabine - Cisplatine</h3><img
+            <h6 style="color : rgb(0, 174, 239)">chimiothérapie de première ligne en Gemcitabine - Cisplatine</h6><img
               class="text-icon" src="assets/images/next.svg" uk-svg width="30" height="30">
 
           </div>
@@ -80,7 +79,7 @@
             <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
               <div class="uk-padding"></div>
 
-              <h3 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Signes Cliniques <img
+              <h3 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Suivi Temporel <img
                   class="text-icon" src="assets/images/hospital.svg" uk-svg width="30" height="30"></h3>
               <ul class="uk-iconnav" style="float: right;">
                 <li><a uk-tooltip="Convertir sous forme d'un tableau" href="#" uk-icon="icon: table"></a></li>
@@ -139,6 +138,123 @@
           <div uk-grid>
             <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
               <div class="uk-padding"></div>
+
+              <h3 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Suivi par symptômes <img
+                  class="text-icon" src="assets/images/hospital.svg" uk-svg width="30" height="30"></h3>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a uk-tooltip="Convertir sous forme d'un tableau" href="#" uk-icon="icon: table"></a></li>
+                <li><a uk-tooltip="Télécharger les données" href="#" uk-icon="icon: download"></a>
+                  <div uk-dropdown="animation: uk-animation-slide-right-small; duration: 1000">
+                    <ul class="uk-nav uk-dropdown-nav">
+                      <li><a style="text-align: left" href="#" uk-icon="icon: file-pdf">Téléchager un PDF</a></li>
+                      <li><a style="text-align: left" href="#" uk-icon="icon: file-text">Télécharger un Fichier
+                          Excel</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a href="#" uk-icon="icon: refresh"></a></li>
+              </ul>
+              <!-- - -->
+              <div style="display: block;">
+                <canvas baseChart width="400" height="200" [datasets]="ScoresData" [labels]="ScoresLabels"
+                  [options]="barChartOptions" [colors]="ScoresColors" [legend]="barChartLegend"
+                  [chartType]="ScoresChart">
+                </canvas>
+
+              </div>
+              <div>
+                <!-- <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer les Symptômes">
+                      </mat-form-field>-->
+                <table mat-table [dataSource]="clinicalSigns">
+                  <ng-container matColumnDef="symptom">
+                    <th mat-header-cell *matHeaderCellDef> Symptômes </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.symptom}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="level">
+                    <th mat-header-cell *matHeaderCellDef> Niveau </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.level}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Temps </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.date | date:'fullDate'}} </td>
+                  </ng-container>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsSv;"></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <div uk-grid>
+      <div class="col-md-12 col-xl-12">
+        <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center">
+
+          <div uk-grid>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
+
+              <h3 style="display: inline-block;float:left;color : rgb(0, 174, 239)"> Suivi de la Douleur <img
+                  class="text-icon" src="assets/images/hospital.svg" uk-svg width="30" height="30"></h3>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a uk-tooltip="Convertir sous forme d'un tableau" href="#" uk-icon="icon: table"></a></li>
+                <li><a uk-tooltip="Télécharger les données" href="#" uk-icon="icon: download"></a>
+                  <div uk-dropdown="animation: uk-animation-slide-right-small; duration: 1000">
+                    <ul class="uk-nav uk-dropdown-nav">
+                      <li><a style="text-align: left" href="#" uk-icon="icon: file-pdf">Téléchager un PDF</a></li>
+                      <li><a style="text-align: left" href="#" uk-icon="icon: file-text">Télécharger un Fichier
+                          Excel</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a href="#" uk-icon="icon: refresh"></a></li>
+              </ul>
+              <!-- - -->
+              <div style="display: block;">
+                <canvas baseChart width="400" height="200" [datasets]="PainData" [labels]="PainLabels"
+                  [options]="PainOptions" [colors]="PainColors" [legend]="barChartLegend"
+                  [chartType]="PainChart">
+                </canvas>
+
+              </div>
+              <div>
+                <!-- <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer les Symptômes">
+                      </mat-form-field>-->
+                <table mat-table [dataSource]="clinicalSigns">
+                  <ng-container matColumnDef="symptom">
+                    <th mat-header-cell *matHeaderCellDef> Symptômes </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.symptom}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="level">
+                    <th mat-header-cell *matHeaderCellDef> Niveau </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.level}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Temps </th>
+                    <td mat-cell *matCellDef="let clinicalSigns"> {{clinicalSigns.date | date:'fullDate'}} </td>
+                  </ng-container>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsSv;"></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    
+    <div uk-grid>
+      <div class="col-md-12 col-xl-12">
+        <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center">
+
+          <div uk-grid>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
               <h3 style="float:left;display:inline;color : rgb(0, 174, 239)">Alertes<img class="text-icon"
                   src="assets/images/danger.svg" uk-svg width="30" height="30"></h3>
               <ul class="uk-iconnav" style="float: right;">
@@ -169,17 +285,60 @@
                   </mat-form-field>
                 </mat-expansion-panel>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
+                  <mat-expansion-panel-header class="alert alert-danger" role="alert">
                     <mat-panel-title>
-                      Self aware panel
+                      <b> Aucune activité depuis Vendredi 12 Juillet 2019</b>
                     </mat-panel-title>
                     <mat-panel-description>
-                      Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                      3 Heures
                     </mat-panel-description>
                   </mat-expansion-panel-header>
-                  <p>I'm visible because I am open</p>
-                </mat-expansion-panel>
+                  <div style="text-align:left">
+                  <p>Il faut informer le patient de l'importance de l'utilisation de l'application pour l'optimisation de traitement</p>
+                <br>
+              <p>Derniére Activité du Patient : Douleur d'intensité 10 le 12 Juillet 2019 à 12h00</p>                
+            </div>
+            </mat-expansion-panel>
               </mat-accordion>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <div uk-grid>
+      <div class="col-md-12 col-xl-12">
+        <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center">
+
+          <div uk-grid>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
+              <h3 style="float:left;display:inline;color : rgb(0, 174, 239)">Fichiers Médicales<img class="text-icon"
+                  src="assets/images/danger.svg" uk-svg width="30" height="30"></h3>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a href="#" uk-icon="icon: plus"></a></li>
+                <li><a href="#" uk-icon="icon: file-edit"></a></li>
+                <li><a href="#" uk-icon="icon: copy"></a></li>
+                <li><a href="#" uk-icon="icon: trash"></a></li>
+              </ul>
+              <br />
+              <br />
+              <mat-list  style="text-align:left">
+                <h3 mat-subheader>Folders</h3>
+                <mat-list-item class="clikable" matRipple *ngFor="let folder of folders">
+                  <mat-icon mat-list-icon>folder</mat-icon>
+                  <h4 mat-line>{{folder.name}}</h4>
+                  <p mat-line> {{folder.updated | date}} </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Notes</h3>
+                <mat-list-item class="clikable" matRipple *ngFor="let note of notes">
+                  <mat-icon mat-list-icon>note</mat-icon>
+                  <h4 mat-line>{{note.name}}</h4>
+                  <p mat-line> {{note.updated | date}} </p>
+                </mat-list-item>
+              </mat-list>
             </div>
           </div>
 
