@@ -245,12 +245,7 @@ export class SinglePatientComponent implements OnInit {
 
   ngOnInit() {
    
-    this.filterForToday()
-    this.filterPerToday = true;
-    this.filterperweek = false;
-    this.filterpermonth = false;
-    this.filterPerCustomDate = false;
-    
+    this.refreshFilter()  
     this.dayOfPain = [0, 0, 0, 0, 0, 0]
     this.weekOfPain = [0, 0, 0, 0, 0, 0]
     this.monthOfPain = [0, 0, 0, 0, 0, 0]
@@ -474,7 +469,7 @@ export class SinglePatientComponent implements OnInit {
               this.appetite[submissionDate.getHours()] = snapshot.docs[i].data().level
             }
       } 
-      /* if (this.filterperweek) {
+      if (this.filterperweek) {
         for (let d = duestart.getDate(); d < dueend.getDate(); d++) {
           if (d == submissionDate.getDate()) {
             if (snapshot.docs[i].data().name == "tiredness") {
@@ -571,7 +566,7 @@ export class SinglePatientComponent implements OnInit {
             end = 8
           }
         }
-      }*/
+      }
      
 
     }
@@ -598,10 +593,10 @@ export class SinglePatientComponent implements OnInit {
     { data: this.min, label: 'Minimum' }
   ]
 
-  this.PainData = [{ data: this.dayOfPain, label: 'Cette Journée' },
-  { data: this.weekOfPain, label: 'Cette Semaine' },
-  { data: this.monthOfPain, label: 'Ce Mois' },
-  { data: this.monthsOfPain, label: 'Ces Derniers Mois' }
+  this.PainData = [{ data: this.dayOfPain, label: 'Jour' },
+  { data: this.weekOfPain, label: 'Semaine' },
+  { data: this.monthOfPain, label: 'Mois' },
+  { data: this.monthsOfPain, label: 'Année' }
   ]
   console.log(this.pain)
   this.barChartData = [{ data: this.pain, label: 'Douleur' },
@@ -619,7 +614,7 @@ console.log(this.pain)
 
 
 let today = new Date()
-    const querhay = this.firestore.collection('Patient').doc("Hammadi").collection('Symptom').orderBy("time").where('time', '>=', today).onSnapshot( (snapshot) =>{
+    const querhay = this.firestore.collection('Patient').doc("Hammadi").collection('Symptom').orderBy("time").where('time', '>=', today).onSnapshot((snapshot) =>{
       snapshot.docChanges().forEach((change) => {
         let submissionDate = new Date( change.doc.data().time.seconds * 1000);
         console.log(this.pain)
