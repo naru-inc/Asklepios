@@ -86,15 +86,8 @@
                 <li><a uk-tooltip="Filter L'affichage" uk-toggle="target: #offcanvas-nav-primary"
                     uk-icon="icon: settings"></a></li>
                 <li><a uk-tooltip="Télécharger les données" href="#" uk-icon="icon: download"></a>
-                  <div uk-dropdown="animation: uk-animation-slide-right-small; duration: 1000">
-                    <ul class="uk-nav uk-dropdown-nav">
-                      <li><a style="text-align: left" href="#" uk-icon="icon: file-pdf">Téléchager un PDF</a></li>
-                      <li><a style="text-align: left" href="#" uk-icon="icon: file-text">Télécharger un Fichier
-                          Excel</a></li>
-                    </ul>
-                  </div>
                 </li>
-                <li><a href="#" uk-icon="icon: refresh"></a></li>
+                <li><a uk-tooltip="Refraichir les données" href="javascript:void(0);" (click)='refreshFilter()' uk-icon="icon: refresh"></a></li>
               </ul>
               <!-- - -->
               <div style="display: block;">

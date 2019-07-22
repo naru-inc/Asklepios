@@ -263,11 +263,10 @@ export class SinglePatientComponent implements OnInit {
 
   public listenToUpdates(patient) {
     let today = new Date()
-    let yestarday = new Date(today.setDate(today.getDate() - 1));
     const query = this.firestore.collection('Patient').doc("Hammadi").collection('Symptom').orderBy("time").onSnapshot(function (snapshot) {
       snapshot.docChanges().forEach((change) => {
         let submissionDate = new Date( change.doc.data().time.seconds * 1000);
-        if (this.filterPerToday && submissionDate.getDate() == yestarday.getDate()) {
+        if (this.filterPerToday && submissionDate.getDate() == today.getDate()) {
           for (let j = 0; j < 23; j++) {
             if (j == submissionDate.getHours()) {
               console.log(change.doc.data())
@@ -372,6 +371,27 @@ export class SinglePatientComponent implements OnInit {
     this.appetite = [0, 0, 0, 0, 0];
     this.getFilteredData(oneMonthAgo, new Date(), this.patient)
   }
+  refreshFilter(){
+    this.filterPerToday = true;
+    this.filterperweek = false;
+    this.filterpermonth = false;
+    this.filterPerCustomDate = false;
+    this.barChartLabels = ['0-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8',
+      '8-9', '9-10', '10-11', '11-12', '12-13', '13-14', '14-15', '15-16', '16-17',
+      '17-18', '18-19', '19-20', '20-21', '21-22', '22-23', '23-0'];
+    this.pain = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.fatigue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.dizziness = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.nausea = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.headache = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.depression = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.anxiety = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.droziwness = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.wellBeing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.breathe = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.appetite = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.getFilteredData(new Date(), new Date(), this.patient)
+  }
   public filterForToday() {
     this.filterPerToday = true;
     this.filterperweek = false;
@@ -450,7 +470,6 @@ export class SinglePatientComponent implements OnInit {
       if (this.filterperweek) {
         for (let d = duestart.getDate(); d < dueend.getDate(); d++) {
           if (d == submissionDate.getDate()) {
-            console.log("we are working here",d, "and the date of submission is",submissionDate)
             if (snapshot.docs[i].data().name == "tiredness") {
               this.fatigue[submissionDate.getDay()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "pain") {
