@@ -665,6 +665,12 @@ let today = new Date()
         { data: this.wellBeing, label: 'Bien-être' },
         { data: this.breathe, label: 'Souffle' },
         { data: this.appetite, label: 'Appétit' }]
+        this.PainData = [{ data: this.dayOfPain, label: 'Jour' },
+        { data: this.weekOfPain, label: 'Semaine' },
+        { data: this.monthOfPain, label: 'Mois' },
+        { data: this.monthsOfPain, label: 'Année' }
+        ]
+  
         
       });
     });;
