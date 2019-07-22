@@ -78,7 +78,6 @@ export class SinglePatientComponent implements OnInit {
     responsive: true,
     scales: {
       xAxes: [{}], yAxes: [{
-        display: true,
         ticks: {
           beginAtZero: true,
           max: 10
@@ -138,19 +137,19 @@ export class SinglePatientComponent implements OnInit {
   public barChartColors: Color[] = [
     {
       borderColor: 'white',
-      backgroundColor: '#E81123',
+      backgroundColor: '#dc3f4d',
     },
     {
       borderColor: 'white',
-      backgroundColor: '#2D7D9A',
+      backgroundColor: '#F28D78',
     },
     {
       borderColor: 'white',
-      backgroundColor: '#498205',
+      backgroundColor: '#C4DE00',
     },
     {
       borderColor: 'white',
-      backgroundColor: '#F7630C',
+      backgroundColor: '#FF5722',
     },
     {
       borderColor: 'white',
@@ -166,11 +165,11 @@ export class SinglePatientComponent implements OnInit {
     },
     {
       borderColor: 'white',
-      backgroundColor: '#01579B',
+      backgroundColor: '#6D92C7',
     },
     {
       borderColor: 'white',
-      backgroundColor: '#8BC34A',
+      backgroundColor: '#7E57C2',
     },
     {
       borderColor: 'white',
@@ -181,7 +180,7 @@ export class SinglePatientComponent implements OnInit {
     {
       borderColor: '#01579B',
       backgroundColor: 'transparent',
-      
+
     },
     {
       borderColor: '#1A237E',
@@ -198,44 +197,44 @@ export class SinglePatientComponent implements OnInit {
   ];
   public PainColors: Color[] = [
     {
-      borderColor: 'white',
-      backgroundColor: '#FF6F00',
+      borderColor: '#dc3f4d',
+      backgroundColor: '#ef9a9a',
     },
     {
-      borderColor: 'white',
-      backgroundColor: '#1B5E20',
+      borderColor: '#FF5722',
+      backgroundColor: '#FFAB91',
     },
     {
-      borderColor: 'white',
-      backgroundColor: '#0D47A1',
+      borderColor: '#FF9800',
+      backgroundColor: '#FFCC80',
     },
     {
-      borderColor: 'white',
-      backgroundColor: '#64DD17',
+      borderColor: '#FFC107',
+      backgroundColor: '#FFE082',
     }
   ];
   folders: Section[] = [
     {
       name: 'Bilans',
-      updated: new Date('1/1/16'),
+      updated: new Date('7/1/19'),
     },
     {
       name: 'Analyses Laboratoires',
-      updated: new Date('1/17/16'),
+      updated: new Date('3/20/19'),
     },
     {
       name: 'Images & Radiologie',
-      updated: new Date('1/28/16'),
+      updated: new Date('6/28/19'),
     }
   ];
   notes: Section[] = [
     {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
+      name: 'Notes sur la réaction du patient au traitement',
+      updated: new Date('5/20/19'),
     },
     {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
+      name: 'Observation Aprés Rendez-Vous',
+      updated: new Date('4/18/19'),
     }
   ];
   constructor(public router: Router, private data: PatientService) {
@@ -245,28 +244,89 @@ export class SinglePatientComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listenToUpdates(this.patient)
-    this.dayOfPain=[0,0,0,0,0,0]
-    this.weekOfPain=[0,0,0,0,0,0]
-    this.monthOfPain=[0,0,0,0,0,0]
-    this.monthsOfPain=[0,0,0,0,0,0]
+    this.filterForToday()
+    this.filterPerToday = true;
+    this.filterperweek = false;
+    this.filterpermonth = false;
+    this.filterPerCustomDate = false;
+    
+    this.dayOfPain = [0, 0, 0, 0, 0, 0]
+    this.weekOfPain = [0, 0, 0, 0, 0, 0]
+    this.monthOfPain = [0, 0, 0, 0, 0, 0]
+    this.monthsOfPain = [0, 0, 0, 0, 0, 0]
     this.today = moment(new Date()).format('LLLL');
     this.data.currentPatient.subscribe(patient => this.patient = patient);
-    this.filterForToday()
+  
     this.dataSource = this.patient.rdv
     this.listenToUpdates(this.patient)
   }
-  public listenToUpdates(patient) {
-    const query = this.firestore.collection('Patient').doc("Hammadi").collection('Symptom').orderBy("time").onSnapshot(function (snapshot) {
-      snapshot.docChanges().forEach(function (change) {
 
+  public listenToUpdates(patient) {
+    let today = new Date()
+    let yestarday = new Date(today.setDate(today.getDate() - 1));
+    const query = this.firestore.collection('Patient').doc("Hammadi").collection('Symptom').orderBy("time").onSnapshot(function (snapshot) {
+      snapshot.docChanges().forEach((change) => {
+        let submissionDate = new Date( change.doc.data().time.seconds * 1000);
+        if (this.filterPerToday && submissionDate.getDate() == yestarday.getDate()) {
+          for (let j = 0; j < 23; j++) {
+            if (j == submissionDate.getHours()) {
+              console.log(change.doc.data())
+              if ( change.doc.data().name == "tiredness") {
+                this.fatigue[j] = change.doc.data().level
+              } else if ( change.doc.data().name == "pain") {
+                this.pain[j] = change.doc.data().level
+                if ( change.doc.data().area == "head") {
+                  this.dayOfPain[0] = change.doc.data().level
+                }
+                else if ( change.doc.data().area == "chest") {
+                  this.dayOfPain[1] = change.doc.data().level
+                }
+                else if ( change.doc.data().area == "palv") {
+                  this.dayOfPain[2] = change.doc.data().level
+                }
+                else if ( change.doc.data().area == "stomach") {
+                  this.dayOfPain[3] = change.doc.data().level
+                }
+                else {
+                  this.dayOfPain[4] = change.doc.data().level
+                }
+              } else if ( change.doc.data().name == "headache") {
+                this.headache[j] = change.doc.data().level
+              } else if ( change.doc.data().name == "depression") {
+                this.depression[j] = change.doc.data().level
+              } else if ( change.doc.data().name == "anxiety") {
+                this.anxiety[j] = change.doc.data().level
+              } else if ( change.doc.data().name == "drawziness") {
+                this.droziwness[j] = change.doc.data().level
+              } else if ( change.doc.data().name == "well-being") {
+                this.wellBeing[j] = change.doc.data().level
+              } else if ( change.doc.data().name == "breathe") {
+                this.breathe[j] = change.doc.data().level
+              } else if ( change.doc.data().name == "appetite") {
+                this.appetite[j] = change.doc.data().level
+              }
+            }
+          }
+        
+        }
+        this.barChartData = [{ data: this.pain, label: 'Douleur' },
+        { data: this.fatigue, label: 'Fatigue' },
+        { data: this.nausea, label: 'Nausée' },
+        { data: this.headache, label: 'Migraine' },
+        { data: this.depression, label: 'Dépression' },
+        { data: this.anxiety, label: 'Anxiété' },
+        { data: this.droziwness, label: 'Somnolence' },
+        { data: this.wellBeing, label: 'Bien-être' },
+        { data: this.breathe, label: 'Souffle' },
+        { data: this.appetite, label: 'Appétit' }]
+        
       });
     });;
   }
-  public filterPerWeek() {
+  public filterForWeek() {
     let today = new Date()
     let end = new Date()
-    this.barChartLabels=[]
+    this.barChartLabels = []
     let oneWeekAgo = new Date(today.setDate(today.getDate() - 7));
     this.filterPerToday = false;
     this.filterperweek = true;
@@ -291,7 +351,7 @@ export class SinglePatientComponent implements OnInit {
 
     this.getFilteredData(oneWeekAgo, new Date(), this.patient)
   }
-  public filterPerMonth() {
+  public filterForMonth() {
     let today = new Date()
     let oneMonthAgo = new Date(today.setMonth(today.getMonth() - 1));
     this.filterPerToday = false;
@@ -310,7 +370,6 @@ export class SinglePatientComponent implements OnInit {
     this.wellBeing = [0, 0, 0, 0, 0];
     this.breathe = [0, 0, 0, 0, 0];
     this.appetite = [0, 0, 0, 0, 0];
-    console.log(oneMonthAgo)
     this.getFilteredData(oneMonthAgo, new Date(), this.patient)
   }
   public filterForToday() {
@@ -318,8 +377,9 @@ export class SinglePatientComponent implements OnInit {
     this.filterperweek = false;
     this.filterpermonth = false;
     this.filterPerCustomDate = false;
-   
-  
+    let today = new Date()
+    let yestarday = new Date(today.setDate(today.getDate() - 1));
+
     this.barChartLabels = ['0-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8',
       '8-9', '9-10', '10-11', '11-12', '12-13', '13-14', '14-15', '15-16', '16-17',
       '17-18', '18-19', '19-20', '20-21', '21-22', '22-23', '23-0'];
@@ -334,7 +394,7 @@ export class SinglePatientComponent implements OnInit {
     this.wellBeing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     this.breathe = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     this.appetite = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    this.getFilteredData(new Date(), new Date(), this.patient)
+    this.getFilteredData(yestarday, yestarday, this.patient)
   }
   async getFilteredData(start, end, patient) {
     let duestart = new Date(start.setHours(0, 0, 0, 0));
@@ -350,7 +410,6 @@ export class SinglePatientComponent implements OnInit {
 
         for (let j = 0; j < 23; j++) {
           if (j == submissionDate.getHours()) {
-            console.log("this is", j, "and its submitted at", submissionDate)
             if (snapshot.docs[i].data().name == "tiredness") {
               this.fatigue[submissionDate.getHours()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "pain") {
@@ -387,13 +446,15 @@ export class SinglePatientComponent implements OnInit {
             }
           }
         }
-      } else if (this.filterperweek) {
-        for (let d = 1; d < 8; d++) {
+      } 
+      if (this.filterperweek) {
+        for (let d = duestart.getDate(); d < dueend.getDate(); d++) {
           if (d == submissionDate.getDate()) {
+            console.log("we are working here",d, "and the date of submission is",submissionDate)
             if (snapshot.docs[i].data().name == "tiredness") {
-              this.fatigue[d] = snapshot.docs[i].data().level
+              this.fatigue[submissionDate.getDay()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "pain") {
-              this.pain[d] = snapshot.docs[i].data().level
+              this.pain[submissionDate.getDay()] = snapshot.docs[i].data().level
               if (snapshot.docs[i].data().area == "head") {
                 this.weekOfPain[0] = snapshot.docs[i].data().level
               }
@@ -410,25 +471,25 @@ export class SinglePatientComponent implements OnInit {
                 this.weekOfPain[4] = snapshot.docs[i].data().level
               }
             } else if (snapshot.docs[i].data().name == "headache") {
-              this.headache[d] = snapshot.docs[i].data().level
+              this.headache[submissionDate.getDay()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "depression") {
-              this.depression[d] = snapshot.docs[i].data().level
+              this.depression[submissionDate.getDay()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "anxiety") {
-              this.anxiety[d] = snapshot.docs[i].data().level
+              this.anxiety[submissionDate.getDay()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "drawziness") {
-              this.droziwness[d] = snapshot.docs[i].data().level
+              this.droziwness[submissionDate.getDay()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "well-being") {
-              this.wellBeing[d] = snapshot.docs[i].data().level
+              this.wellBeing[submissionDate.getDay()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "breathe") {
-              this.breathe[d] = snapshot.docs[i].data().level
+              this.breathe[submissionDate.getDay()] = snapshot.docs[i].data().level
             } else if (snapshot.docs[i].data().name == "appetite") {
-              this.appetite[d] = snapshot.docs[i].data().level
+              this.appetite[submissionDate.getDay()] = snapshot.docs[i].data().level
             }
           }
         }
 
       }
-      else if (this.filterpermonth) {
+       if (this.filterpermonth) {
         let start = duestart.getDate()
         let m = duestart.getMonth()
         let end = 7 - duestart.getDay() + start
@@ -500,13 +561,13 @@ export class SinglePatientComponent implements OnInit {
       this.average = this.randomAvg()
       this.middle = this.randomMid()
       this.ScoresData = [
-        { data: this.average, label: 'Moyenne'},
+        { data: this.average, label: 'Moyenne' },
         { data: this.middle, label: 'Mediane' },
-        { data: this.max, label: 'Maximum'},
+        { data: this.max, label: 'Maximum' },
         { data: this.min, label: 'Minimum' }
       ]
 
-      this.PainData=[ { data: this.dayOfPain, label: 'Cette Journée' },
+      this.PainData = [{ data: this.dayOfPain, label: 'Cette Journée' },
       { data: this.weekOfPain, label: 'Cette Semaine' },
       { data: this.monthOfPain, label: 'Ce Mois' },
       { data: this.monthsOfPain, label: 'Ces Derniers Mois' }

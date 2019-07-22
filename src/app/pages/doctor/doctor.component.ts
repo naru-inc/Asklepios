@@ -37,9 +37,7 @@ export class DoctorComponent implements OnInit {
 
   navigateToPatient(patient) {
     this.data.changePatient(patient);
-console.log(patient)
     this.router.navigate(['doctor/patient/']);
-
   }
  randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
@@ -71,7 +69,7 @@ console.log(patient)
         "Bess Espitia"  ];
       
 
-    for (var i = 0; i < names.length; i++) {  
+    for (var i = 0; i < 10; i++) {  
       for (var j = 0; j < 10; j++) {
         var randomtype = Math.floor(Math.random()*rds.length);
       var random_boolean = Math.random() >= 0.5;

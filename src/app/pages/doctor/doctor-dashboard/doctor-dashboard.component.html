@@ -1,5 +1,5 @@
 <div uk-grid>
-  <div class="col-5 col-xl-4">
+  <div class="col-6 col-xl-6">
     <div>
       <div class="uk-card uk-card-small uk-card-hover  uk-card-body  uk-text-center" style="height:60px;  ">
 
@@ -8,21 +8,21 @@
 
           <div class="col-4 ">
             <div class="uk-flex uk-flex-inline">
-              <h3 style="color : rgb(0, 174, 239)">12 </h3><img class="text-icon" src="assets/images/rdv.svg" uk-svg
+              <h3 style="color : rgb(0, 174, 239)">10 </h3><img class="text-icon" src="assets/images/rdv.svg" uk-svg
                 width="30" height="30">
 
             </div>
           </div>
           <div class="col-4 ">
             <div class="uk-flex uk-flex-inline">
-              <h3 style="color : rgb(0, 174, 239)">1 </h3><img class="text-icon" src="assets/images/mail.svg" uk-svg
+              <h3 style="color : rgb(0, 174, 239)">5 </h3><img class="text-icon" src="assets/images/mail.svg" uk-svg
                 width="30" height="30">
 
             </div>
           </div>
           <div class="col-4 ">
             <div class="uk-flex uk-flex-inline">
-              <h3 style="color : rgb(0, 174, 239)">9 </h3><img class="text-icon" src="assets/images/notifs.svg" uk-svg
+              <h3 style="color : rgb(0, 174, 239)">10 </h3><img class="text-icon" src="assets/images/notifs.svg" uk-svg
                 width="30" height="30">
 
             </div>
@@ -32,19 +32,19 @@
       </div>
     </div>
   </div>
-  <div class="col-4 col-xl-3">
+  <div class="col-6 col-xl-6">
     <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
       <div uk-grid>
 
 
         <div class="col-6 uk-text-left">
-          <h3 style="color : rgb(0, 174, 239)"> 12:24
+          <h3 style="color : rgb(0, 174, 239)"> {{today | date:'hh:mm'}}
           </h3>
         </div>
         <div class="col-6 uk-text-right">
           <h3>
             <div class="uk-flex uk-flex-inline">
-              <h3 style="color : rgb(0, 174, 239)">12 </h3><img src="assets/images/sun.svg" class="text-icon" uk-svg
+              <h3 style="color : rgb(0, 174, 239)">33 </h3><img src="assets/images/sun.svg" class="text-icon" uk-svg
                 width="30" height="30">
 
             </div>
@@ -55,62 +55,179 @@
     </div>
 
   </div>
-  <div class="col">
-    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:60px">
+</div>
+<div uk-grid>
+  <div class="col-md-12 col-xl-12">
+    <div class="uk-card uk-padding-remove  uk-card-primary uk-card-body uk-text-large uk-text-center">
+      <div uk-grid>
+        <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+          <div class="uk-padding"></div>
+          <mat-list>
+            <h3 mat-subheader>Aujourd'hui</h3>
+            <mat-list-item class="clikable" *ngFor="let patient of patients" matRipple
+              (click)="navigateToPatient(patient)">
+              <img matListAvatar src="assets/images/per1.jpg" alt="per1">
+              <h3 matLine> {{patient.name}} <span style="min-width:5px !important" [ngStyle]="getStyles(patient.presence)"
+                  class="uk-badge" style="float:right"></span> </h3>
+              <p style="color:whitesmoke" matLine>
+                <span style="float:right"> {{patient.rdvType}} </span>
+                <span >{{patient.todayDate | date:'shortTime'}}</span>
+              </p>
+
+            </mat-list-item>
+
+
+          </mat-list>
+
+        </div>
+
+      </div>
     </div>
   </div>
 
+</div>
 
+<div uk-grid>
 
+  <div class="col-md-12 col-xl-12">
+    <div class="uk-card uk-card-small uk-card-body uk-text-large uk-text-center">
+
+      <div uk-grid>
+        <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+          <div class="uk-padding"></div>
+
+          <h3 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Patients à Suivre <img class="text-icon"
+              src="assets/images/hospital.svg" uk-svg width="30" height="30"></h3>
+          <ul class="uk-iconnav" style="float: right;">
+            <li><a uk-tooltip="Convertir sous forme d'un tableau" href="#" uk-icon="icon: table"></a></li>
+            <li><a uk-tooltip="Filter L'affichage" uk-toggle="target: #offcanvas-nav-primary"
+                uk-icon="icon: settings"></a></li>
+            <li><a uk-tooltip="Télécharger les données" href="#" uk-icon="icon: download"></a>
+            </li>
+            <li><a href="#" uk-icon="icon: refresh"></a></li>
+          </ul>
+          <!-- - -->
+          <div style="display: block;">
+              <canvas baseChart width="400" height="200" [datasets]="ScoresData" [labels]="ScoresLabels"
+              [options]="ScoresOptions" [colors]="ScoresColors" [legend]="barChartLegend" [chartType]="ScoresChart">
+            </canvas>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div uk-grid>
+  <div class="col-md-6 col-xl-6">
+    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:550px">
+      <div class="uk-padding"></div>
+
+      <h5 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Patients Par Age </h5>
+      <ul class="uk-iconnav" style="float: right;">
+        <li><a uk-tooltip="Convertir sous forme d'un tableau" href="#" uk-icon="icon: table"></a></li>
+        <li><a uk-tooltip="Filter L'affichage" uk-toggle="target: #offcanvas-nav-primary" uk-icon="icon: settings"></a>
+        </li>
+        <li><a uk-tooltip="Télécharger les données" href="#" uk-icon="icon: download"></a>
+        </li>
+        <li><a href="#" uk-icon="icon: refresh"></a></li>
+      </ul>
+      <!-- - -->
+      <div style="display: block;">
+        <canvas baseChart width="1000" height="850" [datasets]="AgeData" [labels]="AgeLabels"
+          [options]="AgeOptions" [colors]="AgeColors" [legend]="AgeLegend" [chartType]="AgeChart">
+        </canvas>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-6 col-xl-6">
+    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:550px">
+      <div class="uk-padding"></div>
+
+      <h5 style="display: inline-block;float:left;color : rgb(0, 174, 239)">Patients Par Sexe </h5>
+      <ul class="uk-iconnav" style="float: right;">
+        <li><a uk-tooltip="Convertir sous forme d'un tableau" href="#" uk-icon="icon: table"></a></li>
+        <li><a uk-tooltip="Filter L'affichage" uk-toggle="target: #offcanvas-nav-primary" uk-icon="icon: settings"></a>
+        </li>
+        <li><a uk-tooltip="Télécharger les données" href="#" uk-icon="icon: download"></a>
+        </li>
+        <li><a href="#" uk-icon="icon: refresh"></a></li>
+      </ul>
+      <!-- - -->
+      <div style="display: block;">
+        <canvas baseChart width="1000" height="850" [datasets]="SexData" [labels]="SexLabels" [colors]="SexColors" [chartType]="SexType">
+        </canvas>
+
+      </div>
+
+    </div>
+  </div>
 
 </div>
 <div uk-grid>
   <div class="col-md-6 col-xl-6">
-    <div class="uk-card uk-padding-remove  uk-card-primary uk-card-hover uk-card-body uk-text-large uk-text-center" >
-
+    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:550px">
         <div uk-grid>
-            <div class="col-md-6 col-xl-6" style="height:550px;  overflow-y: auto">
-
-      <mat-list>
-        <h3 mat-subheader>Aujourd'hui</h3>
-        <mat-list-item class="clikable" *ngFor="let patient of patients" matRipple (click)="navigateToPatient(patient)">
-          <img matListAvatar src="assets/images/per1.jpg" alt="per1">
-          <h3 matLine> {{patient.name}} </h3>
-          <p matLine>
-            <span> {{patient.age}} </span>
-            <span class="demo-2"> | {{patient.sex}} </span>
-          </p>
-        </mat-list-item>
-        
-        
-      </mat-list>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
+              <h5 style="float:left;display:inline;color : rgb(0, 174, 239)">Fichiers Médicales<img class="text-icon"
+                  src="assets/images/danger.svg" uk-svg width="15" height="15"></h5>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a href="#" uk-icon="icon: plus"></a></li>
+                <li><a href="#" uk-icon="icon: file-edit"></a></li>
+                <li><a href="#" uk-icon="icon: copy"></a></li>
+                <li><a href="#" uk-icon="icon: trash"></a></li>
+              </ul>
+              <br />
+              <br />
+              <mat-list  style="text-align:left">
+                <h3 mat-subheader>Dossiers</h3>
+                <mat-list-item class="clikable" matRipple *ngFor="let folder of folders">
+                  <mat-icon mat-list-icon>folder</mat-icon>
+                  <h4 mat-line>{{folder.name}}</h4>
+                  <p mat-line> {{folder.updated | date}} </p>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Fichiers</h3>
+                <mat-list-item class="clikable" matRipple *ngFor="let file of files">
+                  <mat-icon mat-list-icon>note</mat-icon>
+                  <h4 mat-line>{{file.name}}</h4>
+                  <p mat-line> {{file.updated | date}} </p>
+                </mat-list-item>
+              </mat-list>
             </div>
-            <div class="col-md-6 col-xl-6">
+          </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-xl-6">
+    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:550px">
+        <div uk-grid>
+            <div class="col-md-12 col-xl-12" style="min-height:550px;height:auto;  overflow-y: auto">
+              <div class="uk-padding"></div>
+              <h5 style="float:left;display:inline;color : rgb(0, 174, 239)">Notes Et Observations<img class="text-icon"
+                  src="assets/images/danger.svg" uk-svg width="15" height="15"></h5>
+              <ul class="uk-iconnav" style="float: right;">
+                <li><a href="#" uk-icon="icon: plus"></a></li>
+                <li><a href="#" uk-icon="icon: file-edit"></a></li>
+                <li><a href="#" uk-icon="icon: copy"></a></li>
+                <li><a href="#" uk-icon="icon: trash"></a></li>
+              </ul>
+              <br />
+              <br />
+              <mat-list  style="text-align:left">        
+                <h3 mat-subheader>Notes</h3>
+                <mat-list-item class="clikable" matRipple *ngFor="let note of notes">
+                  <mat-icon mat-list-icon>note</mat-icon>
+                  <h4 mat-line>{{note.name}}</h4>
+                  <p mat-line> {{note.updated | date}} </p>
+                </mat-list-item>
+              </mat-list>
             </div>
-        </div>
-
-    </div>
-
-  </div>
-
-  <div class="col-md-3 col-xl-3">
-    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:550px">
-    </div>
-  </div>
-  <div class="col-md-3 col-xl-3">
-    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:550px">
-    </div>
-  </div>
-</div>
-
-<div uk-grid>
-  <div class="col-md-4 col-xl-4">
-    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:550px">
-    </div>
-  </div>
-
-  <div class="col-md-8 col-xl-8">
-    <div class="uk-card uk-card-small  uk-card-hover uk-card-body uk-text-large uk-text-center" style="height:550px">
+          </div>
     </div>
   </div>
 
