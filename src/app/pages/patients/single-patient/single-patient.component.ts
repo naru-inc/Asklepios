@@ -244,6 +244,7 @@ export class SinglePatientComponent implements OnInit {
   }
 
   ngOnInit() {
+   
     this.filterForToday()
     this.filterPerToday = true;
     this.filterperweek = false;
@@ -258,7 +259,7 @@ export class SinglePatientComponent implements OnInit {
     this.data.currentPatient.subscribe(patient => this.patient = patient);
   
     this.dataSource = this.patient.rdv
-    this.listenToUpdates(this.patient)
+    //this.listenToUpdates(this.patient)
   }
 
   public listenToUpdates(patient) {
@@ -266,14 +267,11 @@ export class SinglePatientComponent implements OnInit {
     const query = this.firestore.collection('Patient').doc("Hammadi").collection('Symptom').orderBy("time").onSnapshot(function (snapshot) {
       snapshot.docChanges().forEach((change) => {
         let submissionDate = new Date( change.doc.data().time.seconds * 1000);
-        if (this.filterPerToday && submissionDate.getDate() == today.getDate()) {
-          for (let j = 0; j < 23; j++) {
-            if (j == submissionDate.getHours()) {
               console.log(change.doc.data())
               if ( change.doc.data().name == "tiredness") {
-                this.fatigue[j] = change.doc.data().level
+                this.fatigue[submissionDate.getHours()] = change.doc.data().level
               } else if ( change.doc.data().name == "pain") {
-                this.pain[j] = change.doc.data().level
+                this.pain[submissionDate.getHours()] = change.doc.data().level
                 if ( change.doc.data().area == "head") {
                   this.dayOfPain[0] = change.doc.data().level
                 }
@@ -290,24 +288,22 @@ export class SinglePatientComponent implements OnInit {
                   this.dayOfPain[4] = change.doc.data().level
                 }
               } else if ( change.doc.data().name == "headache") {
-                this.headache[j] = change.doc.data().level
+                this.headache[submissionDate.getHours()] = change.doc.data().level
               } else if ( change.doc.data().name == "depression") {
-                this.depression[j] = change.doc.data().level
+                this.depression[submissionDate.getHours()] = change.doc.data().level
               } else if ( change.doc.data().name == "anxiety") {
-                this.anxiety[j] = change.doc.data().level
+                this.anxiety[submissionDate.getHours()] = change.doc.data().level
               } else if ( change.doc.data().name == "drawziness") {
-                this.droziwness[j] = change.doc.data().level
+                this.droziwness[submissionDate.getHours()] = change.doc.data().level
               } else if ( change.doc.data().name == "well-being") {
-                this.wellBeing[j] = change.doc.data().level
+                this.wellBeing[submissionDate.getHours()] = change.doc.data().level
               } else if ( change.doc.data().name == "breathe") {
-                this.breathe[j] = change.doc.data().level
+                this.breathe[submissionDate.getHours()] = change.doc.data().level
               } else if ( change.doc.data().name == "appetite") {
-                this.appetite[j] = change.doc.data().level
+                this.appetite[submissionDate.getHours()] = change.doc.data().level
               }
-            }
-          }
-        
-        }
+            
+          
         this.barChartData = [{ data: this.pain, label: 'Douleur' },
         { data: this.fatigue, label: 'Fatigue' },
         { data: this.nausea, label: 'Nausée' },
@@ -424,16 +420,22 @@ export class SinglePatientComponent implements OnInit {
     let dayDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
     const query = this.firestore.collection('Patient').doc("Hammadi").collection('Symptom').where('time', '>=', duestart).where('time', '<=', dueend).orderBy("time");
     const snapshot = await query.get()
+    console.log(snapshot)
     for (let i = 0; i < snapshot.size; i++) {
+      console.log(snapshot.docs[i].data())
+      
       let submissionDate = new Date(snapshot.docs[i].data().time.seconds * 1000);
+      console.log(submissionDate.getHours())
       if (this.filterPerToday) {
 
-        for (let j = 0; j < 23; j++) {
-          if (j == submissionDate.getHours()) {
             if (snapshot.docs[i].data().name == "tiredness") {
               this.fatigue[submissionDate.getHours()] = snapshot.docs[i].data().level
-            } else if (snapshot.docs[i].data().name == "pain") {
+            } 
+             if (snapshot.docs[i].data().name == "pain") {
+               
               this.pain[submissionDate.getHours()] = snapshot.docs[i].data().level
+              console.log(this.pain[submissionDate.getHours()])
+              console.log(this.pain)
               if (snapshot.docs[i].data().area == "head") {
                 this.dayOfPain[0] = snapshot.docs[i].data().level
               }
@@ -449,25 +451,30 @@ export class SinglePatientComponent implements OnInit {
               else {
                 this.dayOfPain[4] = snapshot.docs[i].data().level
               }
-            } else if (snapshot.docs[i].data().name == "headache") {
+            } 
+             if (snapshot.docs[i].data().name == "headache") {
               this.headache[submissionDate.getHours()] = snapshot.docs[i].data().level
-            } else if (snapshot.docs[i].data().name == "depression") {
+            } 
+             if (snapshot.docs[i].data().name == "depression") {
               this.depression[submissionDate.getHours()] = snapshot.docs[i].data().level
-            } else if (snapshot.docs[i].data().name == "anxiety") {
+            } 
+             if (snapshot.docs[i].data().name == "anxiety") {
               this.anxiety[submissionDate.getHours()] = snapshot.docs[i].data().level
-            } else if (snapshot.docs[i].data().name == "drawziness") {
+            } 
+             if (snapshot.docs[i].data().name == "drawziness") {
               this.droziwness[submissionDate.getHours()] = snapshot.docs[i].data().level
-            } else if (snapshot.docs[i].data().name == "well-being") {
+            } 
+             if (snapshot.docs[i].data().name == "well-being") {
               this.wellBeing[submissionDate.getHours()] = snapshot.docs[i].data().level
-            } else if (snapshot.docs[i].data().name == "breathe") {
+            } 
+             if (snapshot.docs[i].data().name == "breathe") {
               this.breathe[submissionDate.getHours()] = snapshot.docs[i].data().level
-            } else if (snapshot.docs[i].data().name == "appetite") {
+            } 
+             if (snapshot.docs[i].data().name == "appetite") {
               this.appetite[submissionDate.getHours()] = snapshot.docs[i].data().level
             }
-          }
-        }
       } 
-      if (this.filterperweek) {
+      /* if (this.filterperweek) {
         for (let d = duestart.getDate(); d < dueend.getDate(); d++) {
           if (d == submissionDate.getDate()) {
             if (snapshot.docs[i].data().name == "tiredness") {
@@ -564,47 +571,109 @@ export class SinglePatientComponent implements OnInit {
             end = 8
           }
         }
-      }
-      let minpain = Math.min.apply(null, this.pain), maxpain = Math.max.apply(null, this.pain), midpain = this.calculateMedian(this.pain), avgpain = this.calculateAvg(this.pain),
-        minfatigue = Math.min.apply(null, this.fatigue), maxfatigue = Math.max.apply(null, this.fatigue), midfatigue = this.calculateMedian(this.fatigue), avgfatigue = this.calculateAvg(this.fatigue),
-        minnausea = Math.min.apply(null, this.nausea), maxnausea = Math.max.apply(null, this.nausea), midnausea = this.calculateMedian(this.nausea), avgnausea = this.calculateAvg(this.nausea),
-        minheadache = Math.min.apply(null, this.headache), maxheadache = Math.max.apply(null, this.headache), midheadache = this.calculateMedian(this.headache), avgheadache = this.calculateAvg(this.headache),
-        mindepression = Math.min.apply(null, this.depression), maxdepression = Math.max.apply(null, this.depression), middepression = this.calculateMedian(this.depression), avgdepression = this.calculateAvg(this.depression),
-        minanxiety = Math.min.apply(null, this.anxiety), maxanxiety = Math.max.apply(null, this.anxiety), midanxiety = this.calculateMedian(this.anxiety), avganxiety = this.calculateAvg(this.anxiety),
-        mindroziwness = Math.min.apply(null, this.droziwness), maxdroziwness = Math.max.apply(null, this.droziwness), middroziwness = this.calculateMedian(this.droziwness), avgdroziwness = this.calculateAvg(this.droziwness),
-        minwellBeing = Math.min.apply(null, this.wellBeing), maxwellBeing = Math.max.apply(null, this.wellBeing), midwellBeing = this.calculateMedian(this.wellBeing), avgwellBeing = this.calculateAvg(this.wellBeing),
-        minbreathe = Math.min.apply(null, this.breathe), maxbreathe = Math.max.apply(null, this.breathe), midbreathe = this.calculateMedian(this.breathe), avgbreathe = this.calculateAvg(this.breathe),
-        minappetite = Math.min.apply(null, this.appetite), maxappetite = Math.max.apply(null, this.appetite), midappetite = this.calculateMedian(this.appetite), avgappetite = this.calculateAvg(this.appetite);
-      this.min = this.randomMin()
-      this.max = this.randomMax()
-      this.average = this.randomAvg()
-      this.middle = this.randomMid()
-      this.ScoresData = [
-        { data: this.average, label: 'Moyenne' },
-        { data: this.middle, label: 'Mediane' },
-        { data: this.max, label: 'Maximum' },
-        { data: this.min, label: 'Minimum' }
-      ]
-
-      this.PainData = [{ data: this.dayOfPain, label: 'Cette Journée' },
-      { data: this.weekOfPain, label: 'Cette Semaine' },
-      { data: this.monthOfPain, label: 'Ce Mois' },
-      { data: this.monthsOfPain, label: 'Ces Derniers Mois' }
-      ]
-      this.barChartData = [{ data: this.pain, label: 'Douleur' },
-      { data: this.fatigue, label: 'Fatigue' },
-      { data: this.nausea, label: 'Nausée' },
-      { data: this.headache, label: 'Migraine' },
-      { data: this.depression, label: 'Dépression' },
-      { data: this.anxiety, label: 'Anxiété' },
-      { data: this.droziwness, label: 'Somnolence' },
-      { data: this.wellBeing, label: 'Bien-être' },
-      { data: this.breathe, label: 'Souffle' },
-      { data: this.appetite, label: 'Appétit' }]
-
+      }*/
+     
 
     }
+    console.log(this.pain)
 
+   /*  let minpain = Math.min.apply(null, this.pain), maxpain = Math.max.apply(null, this.pain), midpain = this.calculateMedian(this.pain), avgpain = this.calculateAvg(this.pain),
+    minfatigue = Math.min.apply(null, this.fatigue), maxfatigue = Math.max.apply(null, this.fatigue), midfatigue = this.calculateMedian(this.fatigue), avgfatigue = this.calculateAvg(this.fatigue),
+    minnausea = Math.min.apply(null, this.nausea), maxnausea = Math.max.apply(null, this.nausea), midnausea = this.calculateMedian(this.nausea), avgnausea = this.calculateAvg(this.nausea),
+    minheadache = Math.min.apply(null, this.headache), maxheadache = Math.max.apply(null, this.headache), midheadache = this.calculateMedian(this.headache), avgheadache = this.calculateAvg(this.headache),
+    mindepression = Math.min.apply(null, this.depression), maxdepression = Math.max.apply(null, this.depression), middepression = this.calculateMedian(this.depression), avgdepression = this.calculateAvg(this.depression),
+    minanxiety = Math.min.apply(null, this.anxiety), maxanxiety = Math.max.apply(null, this.anxiety), midanxiety = this.calculateMedian(this.anxiety), avganxiety = this.calculateAvg(this.anxiety),
+    mindroziwness = Math.min.apply(null, this.droziwness), maxdroziwness = Math.max.apply(null, this.droziwness), middroziwness = this.calculateMedian(this.droziwness), avgdroziwness = this.calculateAvg(this.droziwness),
+    minwellBeing = Math.min.apply(null, this.wellBeing), maxwellBeing = Math.max.apply(null, this.wellBeing), midwellBeing = this.calculateMedian(this.wellBeing), avgwellBeing = this.calculateAvg(this.wellBeing),
+    minbreathe = Math.min.apply(null, this.breathe), maxbreathe = Math.max.apply(null, this.breathe), midbreathe = this.calculateMedian(this.breathe), avgbreathe = this.calculateAvg(this.breathe),
+    minappetite = Math.min.apply(null, this.appetite), maxappetite = Math.max.apply(null, this.appetite), midappetite = this.calculateMedian(this.appetite), avgappetite = this.calculateAvg(this.appetite); */
+  this.min = this.randomMin()
+  this.max = this.randomMax()
+  this.average = this.randomAvg()
+  this.middle = this.randomMid()
+  this.ScoresData = [
+    { data: this.average, label: 'Moyenne' },
+    { data: this.middle, label: 'Mediane' },
+    { data: this.max, label: 'Maximum' },
+    { data: this.min, label: 'Minimum' }
+  ]
+
+  this.PainData = [{ data: this.dayOfPain, label: 'Cette Journée' },
+  { data: this.weekOfPain, label: 'Cette Semaine' },
+  { data: this.monthOfPain, label: 'Ce Mois' },
+  { data: this.monthsOfPain, label: 'Ces Derniers Mois' }
+  ]
+  console.log(this.pain)
+  this.barChartData = [{ data: this.pain, label: 'Douleur' },
+  { data: this.fatigue, label: 'Fatigue' },
+  { data: this.nausea, label: 'Nausée' },
+  { data: this.headache, label: 'Migraine' },
+  { data: this.depression, label: 'Dépression' },
+  { data: this.anxiety, label: 'Anxiété' },
+  { data: this.droziwness, label: 'Somnolence' },
+  { data: this.wellBeing, label: 'Bien-être' },
+  { data: this.breathe, label: 'Souffle' },
+  { data: this.appetite, label: 'Appétit' }]
+console.log(this.pain)
+
+
+
+let today = new Date()
+    const querhay = this.firestore.collection('Patient').doc("Hammadi").collection('Symptom').orderBy("time").where('time', '>=', today).onSnapshot( (snapshot) =>{
+      snapshot.docChanges().forEach((change) => {
+        let submissionDate = new Date( change.doc.data().time.seconds * 1000);
+        console.log(this.pain)
+              console.log(change.doc.data())
+              if ( change.doc.data().name == "tiredness") {
+                this.fatigue[submissionDate.getHours()] = change.doc.data().level
+              } else if ( change.doc.data().name == "pain") {
+                this.pain[submissionDate.getHours()] = change.doc.data().level
+                if ( change.doc.data().area == "head") {
+                  this.dayOfPain[0] = change.doc.data().level
+                }
+                else if ( change.doc.data().area == "chest") {
+                  this.dayOfPain[1] = change.doc.data().level
+                }
+                else if ( change.doc.data().area == "palv") {
+                  this.dayOfPain[2] = change.doc.data().level
+                }
+                else if ( change.doc.data().area == "stomach") {
+                  this.dayOfPain[3] = change.doc.data().level
+                }
+                else {
+                  this.dayOfPain[4] = change.doc.data().level
+                }
+              } else if ( change.doc.data().name == "headache") {
+                this.headache[submissionDate.getHours()] = change.doc.data().level
+              } else if ( change.doc.data().name == "depression") {
+                this.depression[submissionDate.getHours()] = change.doc.data().level
+              } else if ( change.doc.data().name == "anxiety") {
+                this.anxiety[submissionDate.getHours()] = change.doc.data().level
+              } else if ( change.doc.data().name == "drawziness") {
+                this.droziwness[submissionDate.getHours()] = change.doc.data().level
+              } else if ( change.doc.data().name == "well-being") {
+                this.wellBeing[submissionDate.getHours()] = change.doc.data().level
+              } else if ( change.doc.data().name == "breathe") {
+                this.breathe[submissionDate.getHours()] = change.doc.data().level
+              } else if ( change.doc.data().name == "appetite") {
+                this.appetite[submissionDate.getHours()] = change.doc.data().level
+              }
+            
+          
+        this.barChartData = [{ data: this.pain, label: 'Douleur' },
+        { data: this.fatigue, label: 'Fatigue' },
+        { data: this.nausea, label: 'Nausée' },
+        { data: this.headache, label: 'Migraine' },
+        { data: this.depression, label: 'Dépression' },
+        { data: this.anxiety, label: 'Anxiété' },
+        { data: this.droziwness, label: 'Somnolence' },
+        { data: this.wellBeing, label: 'Bien-être' },
+        { data: this.breathe, label: 'Souffle' },
+        { data: this.appetite, label: 'Appétit' }]
+        
+      });
+    });;
+    console.log(this.pain)
 
   }
   public calculateMedian(array) {
